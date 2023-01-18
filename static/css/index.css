@@ -1,0 +1,35 @@
+#banner{
+    height: auto;
+}
+
+#subHeader{    
+    background: #1b8bd8; 
+    color: white;
+   /* background-image: url(../images/grad.webp);*/
+}
+
+#banner h1{
+    font-size: 120pt;
+}
+
+main{
+    background-color: var(--main-color);
+    /* background-image: url(../../static/images/bg-uerj.jpg); */
+    /* background-image: url(/static/images/uerj-bg.jpg); */
+    /* background-image: url(/static/images/bg2.jpeg); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: rgb(255, 255, 255);
+}
+
+#carouselExampleControls{
+    height: 300px;
+    width: 100%;
+}
+#carouselExampleControls img{
+    height: 300px;
+}
+a{
+    text-decoration: none;
+}
