@@ -4,10 +4,10 @@ html, body{
 :root{
     --main-color: #ffffff;
 }
-html{
+/* html{
   background-image: url('/static/images/bg.webp');
   background-size: cover;
-}
+} */
 body{
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0);
