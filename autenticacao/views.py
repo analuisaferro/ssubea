@@ -14,6 +14,7 @@ def cadastro_user(request):
         if form_tutor.is_valid():
             if request.POST['password'] == request.POST['password2']:
                 user = User.objects.create_user(request.POST['email'], request.POST['email'], request.POST['password'])
+                
         
     context = {
         'form_tutor': form_tutor,
