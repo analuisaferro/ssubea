@@ -58,9 +58,7 @@
     </div> {% endcomment %}
     <main class="row">
         <div id="mainBlock" class="col pt-5">                                    
-           {% block main %}
-           {% endblock %}
-           
+          <main class="container d-flex flex-column flex-grow-1">{% block main %}{% endblock %}</main>
         </div>
     </main>
     {% include 'footer.html' %}

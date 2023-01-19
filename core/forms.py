@@ -9,13 +9,15 @@ class Form_Tipo(ModelForm):
         fields = ['nome']
 
 class Form_Animal(ModelForm):    
+ 
     class Meta:
         model = Animal
-        tipo = forms.ChoiceField(
-        widget=forms.RadioSelect(),
         
-    )
-        exclude = ['dt_inclusao', 'tutor']
+        exclude = ['dt_inclusao']
+    
+        widgets = {
+                'tutor': forms.HiddenInput(), 
+                'tipo': forms.RadioSelect()}
 
 class Form_Ave(ModelForm):
     class Meta:

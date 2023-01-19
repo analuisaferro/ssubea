@@ -3,7 +3,10 @@
 {% block css %}{% endblock %}
 {% block main %}
 {% load bootstrap5 %}
-
+<h2>Cadastrar animal</h2>
+<form method="POST">
+{% csrf_token %}
 {% bootstrap_form animal_form %}
-
+<button type="submit" class="btn btn-primary w-100 mb-3">Cadastrar</button>
+</form>
 {% endblock %}
