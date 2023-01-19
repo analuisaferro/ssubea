@@ -11,9 +11,11 @@ def index(request):
 @login_required
 def cadastro(request):
     #TESTE
+    #exibir os animais já cadastrados por aquele tutor
+    tutor = Tutor.objects.get(user=request.user.id)
+    print(tutor.nome)
     try:
-        animais = Animal.objects.filter(tutor=request.user.id)
-        print(animais)
+        animais = Animal.objects.filter(tutor=tutor)
     except:
         pass
             #considerando que o local já é cadastrado quando o usuário é cadastrado
@@ -27,6 +29,7 @@ def cadastro(request):
             print(request.user)
     context = {
         'animal_form': animal_form,
+        'animais':animais
     }
     return render(request, 'pensando/animal_cadastro.html', context)
     
