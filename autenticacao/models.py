@@ -6,13 +6,16 @@ from django.contrib.auth.models import User
 
 class Tutor(models.Model):
 
+    def __str__(self):
+        return '%s' % (self.email)
+
     TIPO_DE_MORADIA_CHOICES=[
         ('Própria', 'Própria'), 
         ('Alugada', 'Alugada'),
     ]
     user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    email=models.CharField(max_length=64, verbose_name='Email')
     nome=models.CharField(max_length=64, verbose_name='Nome', blank=False, null=False)
+    email=models.CharField(max_length=64, verbose_name='Email')
     cpf=models.CharField(max_length=14, verbose_name='CPF do tutor', blank=False, null=False)
     rg=models.CharField(max_length=10, verbose_name='Identidade', blank=False, null=False)
     telefone=models.CharField(max_length=14, verbose_name='Telefone', blank=True, null=True)
