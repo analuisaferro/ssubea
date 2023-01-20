@@ -19,6 +19,7 @@ class Animal(models.Model):
         ('m', 'Macho'), 
         ('f', 'Fêmea'),
     ]
+    nome=models.CharField(max_length=64, verbose_name='Nome/apelido', blank=True, null=True)
     tipo=models.ForeignKey(Tipo, on_delete=models.PROTECT, blank=False, null=False)
     tutor=models.ForeignKey(Tutor, on_delete=models.PROTECT, blank=False, null=False)
     sexo=models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name='Sexo do animal', blank=False, null=False)
@@ -26,6 +27,6 @@ class Animal(models.Model):
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
 class Ave(models.Model):
-    animal=models.ForeignKey(Animal, on_delete=models.PROTECT, blank=False, null=False)
-    anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=False, null=False)
-    especie=models.CharField(max_length=64, verbose_name='Espécie', blank=False, null=False)
+    animal=models.ForeignKey(Animal, on_delete=models.CASCADE, blank=True, null=True) 
+    anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
+    especie=models.CharField(max_length=64, verbose_name='Espécie', blank=True, null=True)

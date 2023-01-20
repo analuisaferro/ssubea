@@ -7,6 +7,74 @@
 <form method="POST">
 {% csrf_token %}
 {% bootstrap_form animal_form %}
+{% bootstrap_form ave_form %}
+
 <button type="submit" class="btn btn-primary w-100 mb-3">Cadastrar</button>
 </form>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Nome/apelido</th>
+            <th>Tipo</th>
+            <th>Sexo</th>
+            <th>Castrado</th>
+            <th>Espécie</th>
+            <th>Anilha</th>
+        </tr>
+    </thead>
+    {% for animal in animais %}
+        <tr>
+            <td>{{animal.nome}}</td>
+            <td>{{animal.tipo}}</td>
+            {% if animal.sexo == 'm' %}
+            <td>Macho</td>
+            {% else %}
+            <td>Fêmea</td>
+            {% endif %}
+            {% if animal.castrado == '0' %}
+            <td>NÃO</td>
+            {% else %}
+            <td>SIM</td>
+            {% endif %}
+                {% if animal.tipo.id == 1 %}    
+                    {% for ave in aves %}
+                    {% if ave.animal_id == animal.id %}
+                            <td>{{ave.especie}}</td>
+                            <td>{{ave.anilha}}</td>
+                    {% else %}                    
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+
+        </tr>
+    {% endfor %}
+</table>
+<script>
+    // teste = document.getElementById("id_tipo_0")
+    // console.log(teste)
+    // teste.addEventListener('change',()=>{
+    //     if(teste.checked){
+    //         console.log('oi')
+    //     }
+    // })
+    const anilha = document.getElementById("id_anilha");
+    const especie = document.getElementById("id_especie");
+    anilha.parentNode.style.display = "none";
+    especie.parentNode.style.display = "none";
+
+
+    function teste(v){
+        if(v==1){
+            
+            anilha.parentNode.style.display = "block";
+            especie.parentNode.style.display = "block";
+        }
+        else{
+            anilha.parentNode.style.display = "none";
+            especie.parentNode.style.display = "none";
+            especie.value = "";
+            anilha.value = "";
+        }
+    }
+</script>
 {% endblock %}

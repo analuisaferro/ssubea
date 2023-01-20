@@ -16,20 +16,34 @@ def cadastro(request):
     print(tutor.nome)
     try:
         animais = Animal.objects.filter(tutor=tutor)
+        aves = Ave.objects.filter(animal__tutor=tutor)
+        for ave in aves:
+            print(ave)
     except:
-        pass
-            #considerando que o local já é cadastrado quando o usuário é cadastrado
+        animais = []
+        aves = []
     animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+    ave_form = Form_Ave()
     if request.method == "POST":
         animal_form = Form_Animal(request.POST)
         if animal_form.is_valid():
-            print('entrei')
-            animal_form.save()
-            animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
-            print(request.user)
+            #se for cadastrar dnv os tipos ele não funciona, seria melhor pegar por outra coisa
+            if request.POST['tipo'] == '1':
+                ave_form = Form_Ave(request.POST)
+                if ave_form.is_valid():
+                    animal = animal_form.save()
+                    ave=ave_form.save(commit=False)
+                    ave.animal_id=animal.id
+                    ave.save()
+                    animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+            else:
+                animal_form.save()
+                animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
     context = {
         'animal_form': animal_form,
-        'animais':animais
+        'ave_form':ave_form,
+        'animais':animais,
+        'aves': aves
     }
     return render(request, 'pensando/animal_cadastro.html', context)
     

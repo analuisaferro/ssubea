@@ -17,10 +17,10 @@ class Form_Animal(ModelForm):
     
         widgets = {
                 'tutor': forms.HiddenInput(), 
-                'tipo': forms.RadioSelect()}
+                'tipo': forms.RadioSelect(attrs={'onchange':'teste(this.value)'})}
 
 class Form_Ave(ModelForm):
     class Meta:
         model = Ave
-        exclude = []
+        exclude = ['animal']
 
