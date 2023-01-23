@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+{% block title %}aaaa {% endblock %}
+{% block css %}{% endblock %}
+{% block main %}
+{% load bootstrap5 %}
+<h2>Editar animal</h2>
+<form method="POST">
+{% csrf_token %}
+{% bootstrap_form animal_form %}
+{% bootstrap_form ave_form %}
+
+<button type="submit" class="btn btn-primary w-100 mb-3">Editar</button>
+</form>
+<script>
+    const anilha = document.getElementById("id_anilha");
+    const especie = document.getElementById("id_especie");
+    if (anilha.value != "" || especie.value != ""){
+        let tp = document.getElementById("id_tipo")
+        tp.parentNode.style.display = "none";
+    }
+    
+    else{
+
+    }
+    function teste(v){
+        if(v==1){
+            
+            anilha.parentNode.style.display = "block";
+            especie.parentNode.style.display = "block";
+        }
+        else{
+            anilha.parentNode.style.display = "none";
+            especie.parentNode.style.display = "none";
+            especie.value = "";
+            anilha.value = "";
+        }
+    }
+</script>
+{% endblock %}
