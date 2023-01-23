@@ -14,7 +14,7 @@
         <button type="submit" class="btn btn-primary w-100 mb-3">Cadastrar</button>
         </form>
     </div>
-    <div class="col-8">
+    <div class="col-8   ">
         <table class=" pt-5 table table-striped table-hover">
             <thead>
                 <tr>
@@ -69,22 +69,16 @@
     //     }
     // })
     const anilha = document.getElementById("id_anilha");
-    const especie = document.getElementById("id_especie");
     anilha.parentNode.style.display = "none";
-    especie.parentNode.style.display = "none";
-    especie.value = "";
     anilha.value = "";
 
     function teste(v){
         if(v==1){
             
             anilha.parentNode.style.display = "block";
-            especie.parentNode.style.display = "block";
         }
         else{
             anilha.parentNode.style.display = "none";
-            especie.parentNode.style.display = "none";
-            especie.value = "";
             anilha.value = "";
         }
     }

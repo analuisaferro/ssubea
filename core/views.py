@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db.models import Count
 from .models import *
 from .forms import *
@@ -55,6 +56,8 @@ def editar_animal(request, id):
     except:
         ave_form = Form_Ave()
     if request.method == "POST":
+        if animal.tipo == '1' and request.POST['tipo'] != '1':
+            messages.error(request, "Voc")
         animal_form = Form_Animal(request.POST, instance=animal)
         if animal_form.is_valid():
             if request.POST['tipo'] == '1' and is_ave:

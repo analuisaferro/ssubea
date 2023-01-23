@@ -14,6 +14,13 @@ class Tipo(models.Model):
     nome=models.CharField(max_length=64, verbose_name='', blank=False, null=False)
 
 class Especie(models.Model):
+
+    def __str__(self):
+        return '%s' % (self.nome)
+    
+    class Meta:
+        ordering= ['nome']
+
     nome=models.CharField(max_length=64, verbose_name='Espécie', blank=True, null=True)
 
 class Animal(models.Model):
