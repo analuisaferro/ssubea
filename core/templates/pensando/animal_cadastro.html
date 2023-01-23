@@ -31,7 +31,7 @@
             {% else %}
             <td>Fêmea</td>
             {% endif %}
-            {% if animal.castrado == '0' %}
+            {% if animal.castrado == 0 %}
             <td>NÃO</td>
             {% else %}
             <td>SIM</td>
@@ -44,7 +44,10 @@
                     {% else %}                    
                     {% endif %}
                     {% endfor %}
-                    {% endif %}
+                {% else %}
+                <td>-</td>
+                <td>-</td>
+                {% endif %}
 
         </tr>
     {% endfor %}

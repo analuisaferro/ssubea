@@ -10,18 +10,6 @@ def index(request):
 
 @login_required
 def cadastro(request):
-    #TESTE
-    #exibir os animais já cadastrados por aquele tutor
-    tutor = Tutor.objects.get(user=request.user.id)
-    print(tutor.nome)
-    try:
-        animais = Animal.objects.filter(tutor=tutor)
-        aves = Ave.objects.filter(animal__tutor=tutor)
-        for ave in aves:
-            print(ave)
-    except:
-        animais = []
-        aves = []
     animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
     ave_form = Form_Ave()
     if request.method == "POST":
@@ -39,6 +27,15 @@ def cadastro(request):
             else:
                 animal_form.save()
                 animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+    tutor = Tutor.objects.get(user=request.user.id)
+    try:
+        animais = Animal.objects.filter(tutor=tutor)
+        aves = Ave.objects.filter(animal__tutor=tutor)
+        for ave in aves:
+            print(ave)
+    except:
+        animais = []
+        aves = []
     context = {
         'animal_form': animal_form,
         'ave_form':ave_form,
