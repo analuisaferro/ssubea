@@ -16,12 +16,12 @@ class Tipo(models.Model):
 class Especie(models.Model):
 
     def __str__(self):
-        return '%s' % (self.nome)
+        return '%s' % (self.nome_especie)
     
     class Meta:
-        ordering= ['nome']
+         ordering= ['nome_especie']
 
-    nome=models.CharField(max_length=64, verbose_name='Espécie', blank=True, null=True)
+    nome_especie=models.CharField(max_length=64, verbose_name='Espécie', blank=True, null=True)
 
 class Animal(models.Model):
 
@@ -31,14 +31,11 @@ class Animal(models.Model):
     ]
     nome=models.CharField(max_length=64, verbose_name='Nome/apelido', blank=True, null=True)
     tipo=models.ForeignKey(Tipo, on_delete=models.PROTECT, blank=False, null=False)
-    especie=models.ForeignKey(Especie, on_delete=models.PROTECT, blank=False, null=False)
-    nome=models.CharField(max_length=64, verbose_name='Espécie')
+    especie=models.ForeignKey(Especie, on_delete=models.PROTECT, blank=True, null=True)
     tutor=models.ForeignKey(Tutor, on_delete=models.PROTECT, blank=False, null=False)
     sexo=models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name='Sexo do animal', blank=False, null=False)
     castrado=models.BooleanField(default=False, verbose_name='Castrado')
+    anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
-class Ave(models.Model):
-    animal=models.ForeignKey(Animal, on_delete=models.CASCADE, blank=True, null=True) 
-    anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
 

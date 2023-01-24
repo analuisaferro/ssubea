@@ -8,19 +8,18 @@ class Form_Tipo(ModelForm):
         model = Tipo
         fields = ['nome']
 
+class Form_Especie(ModelForm):
+    class Meta:
+        model = Especie
+        fields = ['nome_especie']
+        
+
 class Form_Animal(ModelForm):    
- 
+
     class Meta:
         model = Animal
         
-        exclude = ['dt_inclusao']
-    
+        exclude = ['dt_inclusao', 'especie']
         widgets = {
                 'tutor': forms.HiddenInput(), 
-                'tipo': forms.RadioSelect(attrs={'onchange':'teste(this.value)'})}
-
-class Form_Ave(ModelForm):
-    class Meta:
-        model = Ave
-        exclude = ['animal']
-
+                'tipo': forms.RadioSelect()}

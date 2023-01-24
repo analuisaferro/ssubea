@@ -9,9 +9,8 @@
         <form method="POST">
         {% csrf_token %}
         {% bootstrap_form animal_form %}
-        {% bootstrap_form ave_form %}
-
-        <button type="submit" class="btn btn-primary w-100 mb-3">Cadastrar</button>
+        {% bootstrap_form especie_form %} 
+        <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
         </form>
     </div>
     <div class="col-8   ">
@@ -41,19 +40,17 @@
                     {% else %}
                     <td>SIM</td>
                     {% endif %}
-                        {% if animal.tipo.id == 1 %}    
-                            {% for ave in aves %}
-                            {% if ave.animal_id == animal.id %}
-                                    <td>{{ave.especie}}</td>
-                                    <td>{{ave.anilha}}</td>
-                            {% else %}                    
-                            {% endif %}
-                            {% endfor %}
-                        {% else %}
-                        <td>-</td>
-                        <td>-</td>
-                        {% endif %}
-                        <td><a href="{% url 'Editar animal' animal.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    {% if animal.especie %}
+                    <td>{{animal.especie}}</td>
+                    {% else %}
+                    <td>-</td>
+                    {% endif %}
+                    {% if animal.tipo.id == 1 %}    
+                    <td>{{animal.anilha}}</td>
+                    {% else %}
+                    <td>-</td>
+                    {% endif %}
+                    <td><a href="{% url 'Editar animal' animal.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             {% endfor %}
         </table>
@@ -69,18 +66,62 @@
     //     }
     // })
     const anilha = document.getElementById("id_anilha");
+    const especie = document.getElementById('id_nome_especie')
     anilha.parentNode.style.display = "none";
     anilha.value = "";
+    especie.value = "";
 
-    function teste(v){
-        if(v==1){
+    // function teste(v){
+    //     if(v==1 || v==6){
+    //         anilha.parentNode.style.display = "block";
+    //     }
+    //     else{   
+    //         anilha.parentNode.style.display = "none";
+    //         anilha.value = "";
+    //     }
+    // }
+    function setRequired(...elements){
+        elements.forEach(e => {
+            console.log(e)
+            e.setAttribute('required', '');
+        })
+    }
+
+    function removeRequired(...elements){
+        elements.forEach(e => {
             
+            e.removeAttribute('required');
+        })
+    }
+
+    function yes_or_no_check(e){
+        if(e.target.value == 1 ){
+            console.log('marcou')
             anilha.parentNode.style.display = "block";
-        }
-        else{
+            setRequired(anilha)
+            setRequired(especie)
+        }else if(e.target.value == 6){
             anilha.parentNode.style.display = "none";
+            setRequired(especie)
+            removeRequired(anilha)
             anilha.value = "";
+
+        }else{
+            anilha.parentNode.style.display = "none";
+            removeRequired(anilha)
+            removeRequired(especie)
+            anilha.value = "";
+
         }
     }
+
+    document.getElementById('id_tipo_0').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_1').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_2').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_3').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_4').addEventListener('change', yes_or_no_check)
+
+
+
 </script>
 {% endblock %}
