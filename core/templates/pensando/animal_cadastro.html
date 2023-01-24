@@ -40,7 +40,7 @@
                     {% else %}
                     <td>SIM</td>
                     {% endif %}
-                    {% if animal.especie %}
+                    {% if animal.especie.nome_especie %}
                     <td>{{animal.especie}}</td>
                     {% else %}
                     <td>-</td>
@@ -96,7 +96,6 @@
 
     function yes_or_no_check(e){
         if(e.target.value == 1 ){
-            console.log('marcou')
             anilha.parentNode.style.display = "block";
             setRequired(anilha)
             setRequired(especie)
