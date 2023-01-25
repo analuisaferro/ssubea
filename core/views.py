@@ -44,11 +44,30 @@ def cadastrar_animal(request):
     
 def editar_animal(request, id):
     animal = Animal.objects.get(id=id)
+    especie = Especie.objects.get(id=animal.especie_id)
     animal_form = Form_Animal(instance=animal)
+    especie_form = Form_Especie(instance=especie)
     if request.method == "POST":
+        especie_form = Form_Especie(request.POST, instance=especie)
         animal_form = Form_Animal(request.POST, instance=animal)
         if animal_form.is_valid():
-            animal_form.save()
+            animal_form.save(commit=False)
+            if especie_form.is_valid():
+                try:
+                    Animal.objects.get(especie_id=especie.id)
+                except:
+                    one = True
+                try:
+                    especie_nova = especie_form.save(commit=False)
+                    especie_antiga = Especie.objects.get(nome_especie=especie_nova)
+                    if especie_antiga:
+                        animal.especie = especie_antiga
+                except:      
+                    especie = especie_form.save()
+                    animal.especie = especie
+                animal.save()
+                if one:
+                    especie.delete()                  
     context = {
         'animal_form': animal_form,
     }
