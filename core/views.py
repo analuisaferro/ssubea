@@ -54,8 +54,7 @@ def editar_animal(request, id):
             animal_form.save(commit=False)
             if especie_form.is_valid():
                 try:
-                    oi = Animal.objects.get(especie_id=especie.id)
-                    print(oi)
+                    Animal.objects.get(especie_id=especie.id)
                     one = True
                 except:
                     one = False
@@ -74,8 +73,13 @@ def editar_animal(request, id):
                     animal.especie = nova
                 animal.save()
                 if one:
-                    especie.delete()                  
+                    if request.POST['nome_especie'] != especie.nome_especie:
+                        print(request.POST['nome_especie'])
+                        print(especie)
+                        especie.delete()
+        return redirect('Cadastrar animal')               
     context = {
+        'animal':animal,
         'animal_form': animal_form,
         'especie_form': especie_form,
     }
@@ -84,4 +88,4 @@ def editar_animal(request, id):
 def deletar_animal(request, id):
     animal = Animal.objects.get(id=id)
     animal.delete()
-    return render(request, 'pensando/animal_cadastro.html')
+    return redirect('Cadastrar animal')

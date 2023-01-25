@@ -3,7 +3,15 @@
 {% block css %}{% endblock %}
 {% block main %}
 {% load bootstrap5 %}
-<h2>Editar animal</h2>
+<div class="row d-flex">
+    <div class="col">
+        <h2 class="m-0">Editar animal</h2>
+    </div>
+    <div class="col d-flex flex-row-reverse">
+        <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#excluir"><i class="fa-solid fa-trash-can"></i>  Deletar</a>
+        <a href="{% url 'Cadastrar animal' %}" class="btn btn-outline-primary mx-2"><i class="fa-solid fa-rotate-left"></i>  Voltar</a>
+    </div>
+</div>
 <form method="POST">
 {% csrf_token %}
 {% bootstrap_form animal_form %}
@@ -11,6 +19,23 @@
 
 <button type="submit" class="btn btn-primary w-100 mb-3">Editar</button>
 </form>
+<div class="modal fade" id="excluir" aria-hidden="true" aria-labelledby="excluirLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger border-0">
+          <h5 class="modal-title text-light text-center" id="excluirLabel">ATENÇÃO!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-dark border-0 pt-5">            
+            <p class="text-center"><b>Tem certeza que deseja excluir este registro?</b></p>
+        </div>
+        <div class="modal-footer border-0">
+          <a href="{% url 'Deletar animal' animal.id %}" class="btn btn-danger">Sim, tenho certeza.</a>
+        </div>
+      </div>
+    </div>
+  </div> 
+
 <script>
     const anilha = document.getElementById("id_anilha");
     const especie = document.getElementById('id_nome_especie')
@@ -22,6 +47,9 @@
     }
     else{
         anilha.parentNode.style.display = "none";
+    }
+    if(especie.value != ""){
+        setRequired(especie)
     }
     // function teste(v){
     //     if(v==1 || v==6){
