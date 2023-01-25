@@ -17,9 +17,10 @@ class Form_Especie(ModelForm):
         
     def clean_nome_especie(self):
         name = self.cleaned_data.get('nome_especie')
-        name = name.lower()
-        name = unicodedata.normalize('NFKD', name).encode('ASCII', 'ignore').decode()
-        return name
+        if name:
+            name = name.lower()
+            name = unicodedata.normalize('NFKD', name).encode('ASCII', 'ignore').decode()
+            return name
 
 
 class Form_Animal(ModelForm):    

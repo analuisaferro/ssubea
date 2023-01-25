@@ -28,7 +28,11 @@
             </thead>
             {% for animal in animais %}
                 <tr>
+                    {% if animal.nome %}
                     <td>{{animal.nome}}</td>
+                    {% else %}
+                    <td>-</td>
+                    {% endif %}
                     <td>{{animal.tipo}}</td>
                     {% if animal.sexo == 'm' %}
                     <td>Macho</td>

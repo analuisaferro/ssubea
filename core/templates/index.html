@@ -41,79 +41,11 @@
                   </div>
                 </div>
                 {% endif %}
-                <h2 class="d-flex mt-3 p-4 text-center" style="background-color: #128325;">
-                    <span class="my-auto mx-auto">Qual serviço você está procurando?</span>
-                </h2>
-                
-                <div class="row">                  
-                  <div class="col">
-                    <img class="img-fluid" src="{% static 'images/banner.jpg' %}" alt="">                    
-                  </div>
-                </div>
+              
                 <div class="row">
                   <div class="col d-flex flex-column pt-4 text-dark px-4">                    
-                      <h5 class="text-uppercase mt-2"><i class="fa-solid fa-list me-4"></i>Todos os sistemas</h5>
-                      <div class="row">
-                        <div class="col mb-4 servicos d-flex flex-wrap justify-content-between pt-2 pb-4">                            
-                            {% for i in servicos %}
-                              <a href="{{i.link}}" target="_blank" class="px-5 d-flex" style="height: 80px;">
-                                <img class="img-fluid my-auto" style="height: 60px;" src="{% static 'images/logo.png' %}" alt="">
-                                <span class="m-auto">{{i.nome}}</span>
-                              </a>  
-                            {% endfor %}                            
-                              <!-- <a href="https://desenvolve.novafriburgo.rj.gov.br/" class="border d-flex" style="height: 80px;">
-                                <span class="m-auto">CEVEST</span>
-                              </a> 
-                              <a href="https://desenvolve.novafriburgo.rj.gov.br/" class="border d-flex" style="height: 80px;">
-                                <span class="m-auto">Mapeamento Cultural</span>
-                              </a>
-                              
-                              <a href="https://desenvolve.novafriburgo.rj.gov.br/" class="border d-flex" style="height: 80px;">
-                                <span class="m-auto">Senhas de Turismo</span>
-                              </a>    -->
-                              <!-- <button href="https://desenvolve.novafriburgo.rj.gov.br/" class="btn btn-secondary bg-light mx-2 mt-1" style="height: 80px;">
-                                <span class="m-auto">
-                                  <img class="img-fluid" style="height: 80px;" src="{% static 'images/arrow-down.png' %}" alt="">
-                                </span>
-                              </button>                                   -->
-                        </div>
-                        
-                        <!-- <div class="col d-flex py-4">
-                          <div class="m-auto">
-                            <i>aqui fica informação do sistema ao passar o mouse</i>
-                          </div>
-                        </div> -->
-                      </div>
-                      <h5 class="text-uppercase">
-                        <i class="fa-solid fa-filter me-4"></i>
-                        Sistemas por secretaria</h5>
-                      <div class="row">
-                        <div class="col mb-4 servicos d-flex flex-column pt-2 pb-4">                            
-                            
-                             <div class="row">
-                              <div class="col px-5 d-flex flex-wrap justify-content-between">
-                                {% for i in secretarias %}
-                                  <div class="mx-2">
-                                    <span class="titulo">{{i.0}}</span>
-                                    <div class="links pt-3">
-                                      {% for u in i.1 %}
-                                      {% for o in u %}
-                                        <p><a href="{{o.link}}">{{o.nome}}</a></p>
-                                      {% endfor %}
-                                      {% endfor %}
-                                    </div>
-                                  </div>
-                                {% endfor %}
-                              </div>
-                             </div>                    
-                        </div>
-                        
-                        <!-- <div class="col d-flex py-4">
-                          <div class="m-auto">
-                            <i>aqui fica informação do sistema ao passar o mouse</i>
-                          </div>
-                        </div> -->
-                      </div>
+                      <a href="{% url 'Cadastrar usuário' %}">Tutor</a>
+                      <a href="{% url 'Cadastrar animal' %}">Animal</a>
                   </div>
               </div>
               <!-- <div class="row">

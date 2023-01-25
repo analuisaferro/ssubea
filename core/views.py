@@ -54,22 +54,30 @@ def editar_animal(request, id):
             animal_form.save(commit=False)
             if especie_form.is_valid():
                 try:
-                    Animal.objects.get(especie_id=especie.id)
-                except:
+                    oi = Animal.objects.get(especie_id=especie.id)
+                    print(oi)
                     one = True
+                except:
+                    one = False
                 try:
+                    #pega a nova
                     especie_nova = especie_form.save(commit=False)
+                    #verifica se já tem
                     especie_antiga = Especie.objects.get(nome_especie=especie_nova)
+                    #se já tem, não salva uma nova, só associa a que já tem
                     if especie_antiga:
                         animal.especie = especie_antiga
-                except:      
-                    especie = especie_form.save()
-                    animal.especie = especie
+                except:  
+                    #se não houver nova, cria uma nova e associa 
+                    especie_nova = especie_form.save(commit=False)
+                    nova = Especie.objects.create(nome_especie=especie_nova.nome_especie)
+                    animal.especie = nova
                 animal.save()
                 if one:
                     especie.delete()                  
     context = {
         'animal_form': animal_form,
+        'especie_form': especie_form,
     }
     return render(request, 'pensando/animal_editar.html', context)
 

@@ -7,32 +7,69 @@
 <form method="POST">
 {% csrf_token %}
 {% bootstrap_form animal_form %}
+{% bootstrap_form especie_form %} 
 
 <button type="submit" class="btn btn-primary w-100 mb-3">Editar</button>
 </form>
 <script>
     const anilha = document.getElementById("id_anilha");
-    const especie = document.getElementById("id_especie");
-    if (anilha.value != "" || especie.value != ""){
-        let tp = document.getElementById("id_tipo")
-        tp.parentNode.style.display = "none";
+    const especie = document.getElementById('id_nome_especie')
+    ave = document.getElementById('id_tipo_0')
+    if(ave.checked){
+        document.querySelector(".radio-success").parentNode.style.display = "none"
+        anilha.parentNode.style.display = "block";
+        
     }
-    
     else{
+        anilha.parentNode.style.display = "none";
+    }
+    // function teste(v){
+    //     if(v==1 || v==6){
+    //         anilha.parentNode.style.display = "block";
+    //     }
+    //     else{   
+    //         anilha.parentNode.style.display = "none";
+    //         anilha.value = "";
+    //     }
+    // }
+    function setRequired(...elements){
+        elements.forEach(e => {
+            console.log(e)
+            e.setAttribute('required', '');
+        })
+    }
 
-    }
-    function teste(v){
-        if(v==1){
+    function removeRequired(...elements){
+        elements.forEach(e => {
             
+            e.removeAttribute('required');
+        })
+    }
+
+    function yes_or_no_check(e){
+        if(e.target.value == 1 ){
             anilha.parentNode.style.display = "block";
-            especie.parentNode.style.display = "block";
-        }
-        else{
+            setRequired(anilha)
+            setRequired(especie)
+        }else if(e.target.value == 6){
             anilha.parentNode.style.display = "none";
-            especie.parentNode.style.display = "none";
-            especie.value = "";
+            setRequired(especie)
+            removeRequired(anilha)
             anilha.value = "";
+
+        }else{
+            anilha.parentNode.style.display = "none";
+            removeRequired(anilha)
+            removeRequired(especie)
+            anilha.value = "";
+
         }
     }
+    ave.addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_1').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_2').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_3').addEventListener('change', yes_or_no_check)
+    document.getElementById('id_tipo_4').addEventListener('change', yes_or_no_check)
+
 </script>
 {% endblock %}

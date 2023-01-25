@@ -29,6 +29,9 @@ class Animal(models.Model):
         ('m', 'Macho'), 
         ('f', 'Fêmea'),
     ]
+    def __str__(self):
+        return '%s' % (self.nome)
+   
     nome=models.CharField(max_length=64, verbose_name='Nome/apelido', blank=True, null=True)
     tipo=models.ForeignKey(Tipo, on_delete=models.PROTECT, blank=False, null=False)
     especie=models.ForeignKey(Especie, on_delete=models.PROTECT, blank=True, null=True)
