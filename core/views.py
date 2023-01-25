@@ -18,10 +18,16 @@ def cadastrar_animal(request):
         especie_form = Form_Especie(request.POST)
         if animal_form.is_valid():
             if especie_form.is_valid():
-                    especie = especie_form.save()
                     animal = animal_form.save(commit=False)
-                    animal.especie = especie
-                    animal.save()   
+                    try:
+                        nova_especie = especie_form.save(commit=False)
+                        especie = Especie.objects.get(nome_especie=nova_especie)
+                        if especie:
+                            animal.especie = especie
+                    except:      
+                        especie = especie_form.save()
+                        animal.especie = especie
+                    animal.save()
                     animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
 
     tutor = Tutor.objects.get(user=request.user.id)

@@ -41,7 +41,7 @@
                     <td>SIM</td>
                     {% endif %}
                     {% if animal.especie.nome_especie %}
-                    <td>{{animal.especie}}</td>
+                    <td>{{animal.especie|title}}</td>
                     {% else %}
                     <td>-</td>
                     {% endif %}
