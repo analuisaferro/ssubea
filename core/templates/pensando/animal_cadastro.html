@@ -1,5 +1,5 @@
 {% extends 'template.html' %}
-{% block title %}aaaa {% endblock %}
+{% block title %}SSUBEA{% endblock %}
 {% block css %}{% endblock %}
 {% block main %}
 {% load bootstrap5 %}
@@ -102,18 +102,16 @@
     function yes_or_no_check(e){
         if(e.target.value == 1 ){
             anilha.parentNode.style.display = "block";
-            setRequired(anilha)
-            setRequired(especie)
+            setRequired(anilha, especie);
         }else if(e.target.value == 6){
             anilha.parentNode.style.display = "none";
-            setRequired(especie)
-            removeRequired(anilha)
+            setRequired(especie);
+            removeRequired(anilha);
             anilha.value = "";
 
         }else{
             anilha.parentNode.style.display = "none";
-            removeRequired(anilha)
-            removeRequired(especie)
+            removeRequired(anilha, especie);
             anilha.value = "";
 
         }

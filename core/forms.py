@@ -20,7 +20,7 @@ class Form_Especie(ModelForm):
         if name:
             name = name.lower()
             name = unicodedata.normalize('NFKD', name).encode('ASCII', 'ignore').decode()
-            return name
+        return name
 
 
 class Form_Animal(ModelForm):    
@@ -32,3 +32,12 @@ class Form_Animal(ModelForm):
         widgets = {
                 'tutor': forms.HiddenInput(), 
                 'tipo': forms.RadioSelect()}
+        
+class Form_Errante(ModelForm):
+    class Meta:
+        model = Errante
+
+        exclude = ['dt_inclusao', 'especie']
+        widgets = {
+            'tipo':forms.RadioSelect(),
+        }

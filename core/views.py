@@ -59,15 +59,11 @@ def editar_animal(request, id):
                 except:
                     one = False
                 try:
-                    #pega a nova
                     especie_nova = especie_form.save(commit=False)
-                    #verifica se já tem
                     especie_antiga = Especie.objects.get(nome_especie=especie_nova)
-                    #se já tem, não salva uma nova, só associa a que já tem
                     if especie_antiga:
                         animal.especie = especie_antiga
                 except:  
-                    #se não houver nova, cria uma nova e associa 
                     especie_nova = especie_form.save(commit=False)
                     nova = Especie.objects.create(nome_especie=especie_nova.nome_especie)
                     animal.especie = nova
@@ -89,3 +85,34 @@ def deletar_animal(request, id):
     animal = Animal.objects.get(id=id)
     animal.delete()
     return redirect('Cadastrar animal')
+
+def cadastrar_errante(request):
+    errante_form = Form_Errante()
+    especie_form = Form_Especie()
+
+    context = {
+        'errante_form': errante_form,
+        'especie_form': especie_form
+    }
+    if request.method == "POST":
+        errante_form = Form_Errante(request.POST)
+        especie_form = Form_Especie(request.POST)
+        if errante_form.is_valid():
+            if especie_form.is_valid():
+                errante = errante_form.save(commit=False)
+                try:
+                    n_especie = especie_form.save(commit=False)
+                    especie = Especie.objects.get(nome_especie=n_especie)
+                    if especie:
+                        errante.especie = especie
+                except:      
+                    especie = especie_form.save()
+                    errante.especie = especie
+                errante.save()
+
+                return redirect('index')
+    context = {
+        'errante_form': errante_form,
+        'especie_form': especie_form
+    }
+    return render(request, 'pensando/animal-errante-cadastro.html', context)

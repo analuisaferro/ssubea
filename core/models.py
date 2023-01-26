@@ -41,4 +41,21 @@ class Animal(models.Model):
     anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
+class Errante(models.Model):
+
+    # SEXO_CHOICES=[
+    #     ('m', 'Macho'), 
+    #     ('f', 'Fêmea'),
+    #     ('n', 'Não identificado')
+    # ]
+
+    def __str__(self):
+        return '%s' % (self.pelagem)
+    
+    
+    pelagem=models.CharField(max_length=64, verbose_name="Pelagem", blank=False, null=False)
+    tipo=models.ForeignKey(Tipo, on_delete=models.PROTECT, blank=False, null=False)
+    especie=models.ForeignKey(Especie, on_delete=models.PROTECT, blank=True, null=True)
+    dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
+
 
