@@ -50,29 +50,27 @@ def editar_animal(request, id):
     if request.method == "POST":
         especie_form = Form_Especie(request.POST, instance=especie)
         animal_form = Form_Animal(request.POST, instance=animal)
-        if animal_form.is_valid():
+        if animal_form.is_valid() and especie_form.is_valid():
             animal_form.save(commit=False)
-            if especie_form.is_valid():
-                try:
-                    Animal.objects.get(especie_id=especie.id)
-                    one = True
-                except:
-                    one = False
-                try:
-                    especie_nova = especie_form.save(commit=False)
-                    especie_antiga = Especie.objects.get(nome_especie=especie_nova)
-                    if especie_antiga:
-                        animal.especie = especie_antiga
-                except:  
-                    especie_nova = especie_form.save(commit=False)
-                    nova = Especie.objects.create(nome_especie=especie_nova.nome_especie)
-                    animal.especie = nova
-                animal.save()
-                if one:
-                    if request.POST['nome_especie'] != especie.nome_especie:
-                        print(request.POST['nome_especie'])
-                        print(especie)
-                        especie.delete()
+            try:
+                Animal.objects.get(especie_id=especie.id)
+                one = True
+            except:
+                one = False
+            try:
+                especie_nova = especie_form.save(commit=False)
+                especie_antiga = Especie.objects.get(nome_especie=especie_nova)
+                if especie_antiga:
+                    animal.especie = especie_antiga
+            except:  
+                especie_nova = especie_form.save(commit=False)
+                nova = Especie.objects.create(nome_especie=especie_nova.nome_especie)
+                animal.especie = nova
+            animal.save()
+            if one and request.POST['nome_especie'] != especie.nome_especie:
+                print(request.POST['nome_especie'])
+                print(especie)
+                especie.delete()
         return redirect('Cadastrar animal')               
     context = {
         'animal':animal,

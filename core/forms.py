@@ -1,6 +1,6 @@
 import unicodedata
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, ModelChoiceField
 from .models import *
 
 
@@ -36,8 +36,5 @@ class Form_Animal(ModelForm):
 class Form_Errante(ModelForm):
     class Meta:
         model = Errante
-
         exclude = ['dt_inclusao', 'especie']
-        widgets = {
-            'tipo':forms.RadioSelect(),
-        }
+        tipo = forms.ChoiceField(queryset=Tipo.objects.filter(id=1), widget=forms.RadioSelect)
