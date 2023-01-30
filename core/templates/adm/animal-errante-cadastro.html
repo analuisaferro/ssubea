@@ -19,12 +19,12 @@
     especie.value = "";
 
 
+
     function yes_or_no_check(e){
-        if(e.target.value == 1 || e.target.value == 6 ){
+        if(e.target.value == 5 ){
             setRequired(especie)
             show_parent(especie)
         }else{
-            console.log(e.target.value)
             removeRequired(especie)
             hide_parent(especie)
             especie.value = "";
@@ -47,10 +47,12 @@
     function hide_parent(e){
             e.parentNode.style.display = "none";
     }
-    document.getElementById('id_tipo_0').addEventListener('change', yes_or_no_check);
     document.getElementById('id_tipo_1').addEventListener('change', yes_or_no_check);
-    document.getElementById('id_tipo_2').addEventListener('change', yes_or_no_check);
     document.getElementById('id_tipo_3').addEventListener('change', yes_or_no_check);
     document.getElementById('id_tipo_4').addEventListener('change', yes_or_no_check);
+
+
+    hide_parent(document.getElementById('id_tipo_0').parentNode)
+    hide_parent(document.getElementById('id_tipo_2').parentNode)
 </script>
 {% endblock %}

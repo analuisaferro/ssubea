@@ -16,19 +16,13 @@ def cadastrar_animal(request):
     if request.method == "POST":
         animal_form = Form_Animal(request.POST)
         especie_form = Form_Especie(request.POST)
-        if animal_form.is_valid():
-            if especie_form.is_valid():
-                    animal = animal_form.save(commit=False)
-                    try:
-                        nova_especie = especie_form.save(commit=False)
-                        especie = Especie.objects.get(nome_especie=nova_especie)
-                        if especie:
-                            animal.especie = especie
-                    except:      
-                        especie = especie_form.save()
-                        animal.especie = especie
-                    animal.save()
-                    animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+        if animal_form.is_valid() and especie_form.is_valid():
+            animal = animal_form.save(commit=False)
+            v_especie = especie_form.save(commit=False)
+            especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+            animal.especie = especie
+            animal.save()
+            animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
 
     tutor = Tutor.objects.get(user=request.user.id)
     try:
@@ -50,29 +44,21 @@ def editar_animal(request, id):
     if request.method == "POST":
         especie_form = Form_Especie(request.POST, instance=especie)
         animal_form = Form_Animal(request.POST, instance=animal)
-        if animal_form.is_valid():
+        if animal_form.is_valid() and especie_form.is_valid():
             animal_form.save(commit=False)
-            if especie_form.is_valid():
-                try:
-                    Animal.objects.get(especie_id=especie.id)
-                    one = True
-                except:
-                    one = False
-                try:
-                    especie_nova = especie_form.save(commit=False)
-                    especie_antiga = Especie.objects.get(nome_especie=especie_nova)
-                    if especie_antiga:
-                        animal.especie = especie_antiga
-                except:  
-                    especie_nova = especie_form.save(commit=False)
-                    nova = Especie.objects.create(nome_especie=especie_nova.nome_especie)
-                    animal.especie = nova
-                animal.save()
-                if one:
-                    if request.POST['nome_especie'] != especie.nome_especie:
-                        print(request.POST['nome_especie'])
-                        print(especie)
-                        especie.delete()
+            try:
+                Animal.objects.get(especie_id=especie.id)
+                one = True
+            except:
+                one = False
+            v_especie = especie_form.save(commit=False)
+            especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+            animal.especie = especie
+            animal.save()
+            if one and request.POST['nome_especie'] != especie.nome_especie:
+                print(request.POST['nome_especie'])
+                print(especie)
+                especie.delete()
         return redirect('Cadastrar animal')               
     context = {
         'animal':animal,
@@ -100,14 +86,9 @@ def cadastrar_errante(request):
         if errante_form.is_valid():
             if especie_form.is_valid():
                 errante = errante_form.save(commit=False)
-                try:
-                    n_especie = especie_form.save(commit=False)
-                    especie = Especie.objects.get(nome_especie=n_especie)
-                    if especie:
-                        errante.especie = especie
-                except:      
-                    especie = especie_form.save()
-                    errante.especie = especie
+                v_especie = especie_form.save(commit=False)
+                especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+                errante.especie = especie
                 errante.save()
 
                 return redirect('index')
