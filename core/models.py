@@ -13,6 +13,9 @@ class Tipo(models.Model):
         ordering = ['nome']
     nome=models.CharField(max_length=64, verbose_name='', blank=False, null=False)
 
+class Periodo(models.Model):
+    intervalo = models.CharField(max_length=32, blank=False, null=False)
+    
 class Especie(models.Model):
 
     def __str__(self):
@@ -40,6 +43,20 @@ class Animal(models.Model):
     castrado=models.BooleanField(default=False, verbose_name='Castrado')
     anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
+
+class Info_Extras(models.Model):
+    class Meta:
+        ordering = ['animal']
+    animal=models.ForeignKey(Animal, on_delete=models.PROTECT)
+    alimentacao_tipo=models.CharField(max_length=128, verbose_name='Tipo de alimentação', blank=True, null=True)
+    alimentacao_periodo=models.ManyToManyField(Periodo, verbose_name='Período da alimentação')
+    condicoes=models.CharField(max_length=128, verbose_name='Condições de abrigo na residência')
+    dt_vacinacao=models.DateField(verbose_name='Data da última vacinação', auto_now=False, blank=True, null=True)
+    dt_vermifugacao=models.DateField(verbose_name='Data da última vermifugação', auto_now=False, blank=True, null=True)
+    complemento=models.CharField(max_length=256, verbose_name='Complemento', blank=True, null=True)
+    dt_registro=models.DateField(verbose_name='Data do registro', blank=True, null=True)
+
+
 
 class Errante(models.Model):
 

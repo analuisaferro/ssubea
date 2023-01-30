@@ -17,7 +17,6 @@ class Tutor(models.Model):
     nome=models.CharField(max_length=64, verbose_name='Nome', blank=False, null=False)
     email=models.EmailField()
     cpf=models.CharField(max_length=14, verbose_name='CPF', blank=False, null=False, unique=True)
-    rg=models.CharField(max_length=10, verbose_name='Identidade', blank=False, null=False)
     telefone=models.CharField(max_length=14, verbose_name='Telefone', blank=True, null=True)
     dt_nascimento=models.DateField(verbose_name='Data de nascimento', blank=False, null=False)
     bairro=models.CharField(max_length=64, verbose_name='Bairro', blank=False, null=False)

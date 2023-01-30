@@ -40,7 +40,7 @@ def cadastrar_animal(request):
         'especie_form': especie_form,
         'animais':animais,
     }
-    return render(request, 'pensando/animal_cadastro.html', context)
+    return render(request, 'tutor/animal_cadastro.html', context)
     
 def editar_animal(request, id):
     animal = Animal.objects.get(id=id)
@@ -79,7 +79,7 @@ def editar_animal(request, id):
         'animal_form': animal_form,
         'especie_form': especie_form,
     }
-    return render(request, 'pensando/animal_editar.html', context)
+    return render(request, 'tutor/animal_editar.html', context)
 
 def deletar_animal(request, id):
     animal = Animal.objects.get(id=id)
@@ -115,4 +115,12 @@ def cadastrar_errante(request):
         'errante_form': errante_form,
         'especie_form': especie_form
     }
-    return render(request, 'pensando/animal-errante-cadastro.html', context)
+    return render(request, 'adm/animal-errante-cadastro.html', context)
+
+def listar_tutor(request):
+    tutores = Tutor.objects.all()
+    print(tutores)
+    context = {
+        'tutores':tutores
+    }
+    return render(request, 'adm/listar-tutores.html', context)

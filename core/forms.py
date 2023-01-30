@@ -41,3 +41,11 @@ class Form_Errante(ModelForm):
         widgets = {
             'tipo':forms.RadioSelect(),
         }
+
+class Form_Info_Extras(ModelForm):
+    class Meta:
+        model = Info_Extras
+        fields = ['alimentacao_tipo', 'alimentacao_periodo', 'condicoes', 'dt_vacinacao', 'dt_vermifugacao', 'complemento', 'dt_registro']
+        widgets = {
+            'alimentacao_periodo':forms.RadioSelect(),
+        }
