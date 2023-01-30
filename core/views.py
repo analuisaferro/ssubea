@@ -119,8 +119,24 @@ def cadastrar_errante(request):
 
 def listar_tutor(request):
     tutores = Tutor.objects.all()
-    print(tutores)
+    qntd = Tutor.objects.all().count()
     context = {
-        'tutores':tutores
+        'tutores':tutores,
+        'qntd':qntd
     }
     return render(request, 'adm/listar-tutores.html', context)
+
+def listar_animal_tutor(request, tutor_id):
+    animais = Animal.objects.filter(tutor_id=tutor_id)
+    print(animais)
+    context = {
+        'animais':animais
+    }
+    return render(request, 'adm/listar-animais-tutor.html', context)
+
+def cad_info_extra(request, tutor_id, animal_id):
+    info_extras_form = Form_Info_Extras(initial={'animal':Animal.objects.get(pk=animal_id).id})
+    context = {
+        'info_extras_form':info_extras_form
+    }
+    return render(request, 'adm/info-extra-cadastrar.html', context)

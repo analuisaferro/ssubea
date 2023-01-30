@@ -48,4 +48,9 @@ class Form_Info_Extras(ModelForm):
         fields = ['alimentacao_tipo', 'alimentacao_periodo', 'condicoes', 'dt_vacinacao', 'dt_vermifugacao', 'complemento', 'dt_registro']
         widgets = {
             'alimentacao_periodo':forms.RadioSelect(),
+            'dt_vacinacao':forms.TextInput(attrs={'type':'date'}),
+            'dt_vermifugacao':forms.TextInput(attrs={'type':'date'}),
+            'dt_registro':forms.TextInput(attrs={'type':'date'})
+
+
         }

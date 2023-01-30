@@ -14,6 +14,9 @@ class Tipo(models.Model):
     nome=models.CharField(max_length=64, verbose_name='', blank=False, null=False)
 
 class Periodo(models.Model):
+    def __str__(self):
+        return '%s' % (self.intervalo)
+    
     intervalo = models.CharField(max_length=32, blank=False, null=False)
     
 class Especie(models.Model):
@@ -55,8 +58,6 @@ class Info_Extras(models.Model):
     dt_vermifugacao=models.DateField(verbose_name='Data da última vermifugação', auto_now=False, blank=True, null=True)
     complemento=models.CharField(max_length=256, verbose_name='Complemento', blank=True, null=True)
     dt_registro=models.DateField(verbose_name='Data do registro', blank=True, null=True)
-
-
 
 class Errante(models.Model):
 

@@ -1,0 +1,55 @@
+{% extends 'template.html' %}
+{% block title %}SSUBEA{% endblock %}
+{% block css %}{% endblock %}
+{% block main %}
+{% load bootstrap5 %}
+<div class="row">
+    <div class="col">
+        <h2>Cadastrar informações extra</h2>
+        <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form info_extras_form %}
+        <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
+        </form>
+    </div>
+<script>
+    const especie = document.getElementById('id_nome_especie');
+    hide_parent(especie)
+    especie.value = "";
+
+
+    function yes_or_no_check(e){
+        if(e.target.value == 1 || e.target.value == 6 ){
+            setRequired(especie)
+            show_parent(especie)
+        }else{
+            console.log(e.target.value)
+            removeRequired(especie)
+            hide_parent(especie)
+            especie.value = "";
+
+        }
+    }
+    function setRequired(...elements){
+        elements.forEach(e => {
+            e.setAttribute('required', '');
+        })
+    }
+    function removeRequired(...elements){
+        elements.forEach(e => {
+            e.removeAttribute('required');
+        })
+    }
+    function show_parent(e){
+            e.parentNode.style.display = "block";
+    }
+    function hide_parent(e){
+            e.parentNode.style.display = "none";
+    }
+    document.getElementById('id_tipo_0').addEventListener('change', yes_or_no_check);
+    document.getElementById('id_tipo_1').addEventListener('change', yes_or_no_check);
+    document.getElementById('id_tipo_2').addEventListener('change', yes_or_no_check);
+    document.getElementById('id_tipo_3').addEventListener('change', yes_or_no_check);
+    document.getElementById('id_tipo_4').addEventListener('change', yes_or_no_check);
+</script>
+{% endblock %}

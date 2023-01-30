@@ -5,9 +5,33 @@
 {% load bootstrap5 %}
 <div class="row">
     <div class="col">
-        <h2>Cadastrar animal errante</h2>
-        <table>
-            
+        <h2>Listar tutores</h2>
+        <p>Total de tutores: {{qntd}}</p>
+        <table class=" pt-5 table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Data de nascimento</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>tipo_de_moradia</th>
+                    <th>Qntd. Animais</th>
+                    <th>Visualizar animais</th>
+                </tr>
+            </thead>
+            {% for tutor in tutores %}
+                <tr>
+                    <td>{{tutor.nome}}</td>
+                    <td>{{tutor.telefone}}</td>
+                    <td>{{tutor.dt_nascimento}}</td>
+                    <td>{{tutor.endereco}}</td>
+                    <td>{{tutor.bairro}}</td>
+                    <td>{{tutor.tipo_de_moradia}}</td>
+                    <td>-</td>
+                    <td><a href="{% url 'listar animais tutor' tutor.id %}"><i class="fa-solid fa-eye"></i></a></td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 <script>
