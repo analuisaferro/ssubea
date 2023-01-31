@@ -5,7 +5,60 @@
 {% load bootstrap5 %}
 <div class="row">
     <div class="col">
-        <h2>Cadastrar informações extra</h2>
+        <h2>Cadastrar informações extras</h2>
+        <h4 class="my-4">Animal:
+        </h4>
+        <table class=" pt-5 table table-borderless">
+            {% if animal.tipo == 'AVES' %}
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tutor</th>
+                    <th>Tipo</th>
+                    <th>Espécie</th>
+                    <th>Anilha</th>
+                </tr>
+            </thead>
+            <tr>
+               <td>{{animal.nome}}</td>
+               <td>{{animal.tutor.nome}}</td>
+               <td>{{animal.tipo}}</td>
+               {% if animal.especie %}
+               <td>{{animal.especie}}</td>
+               {% else %}
+               <td>-</td>
+               {% endif %}
+                <td>{{animal.anilha}}</td>
+            </tr>
+            {% else %} 
+            <!-- outra -->
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tutor</th>
+                    <th>Tipo</th>
+                    <th>Espécie</th>
+                    <th>Castrado</th>
+                </tr>
+            </thead>
+            <tr>
+               <td>{{animal.nome}}</td>
+               <td>{{animal.tutor.nome}}</td>
+               <td>{{animal.tipo}}</td>
+
+               {% if animal.especie %}
+               <td>{{animal.especie}}</td>
+               {% else %}
+               <td>-</td>
+               {% endif %}
+               {% if animal.castrado == 0 %}
+               <td>NÃO</td>
+               {% else %}
+               <td>SIM</td>
+               {% endif %}
+            </tr>
+            {% endif %}
+        </table>
         <form method="POST">
         {% csrf_token %}
         {% bootstrap_form info_extras_form %}

@@ -109,15 +109,42 @@ def listar_tutor(request):
 
 def listar_animal_tutor(request, tutor_id):
     animais = Animal.objects.filter(tutor_id=tutor_id)
-    print(animais)
+    tutor = Tutor.objects.get(pk=tutor_id).nome
     context = {
-        'animais':animais
+        'animais':animais,
+        'tutor':tutor
     }
     return render(request, 'adm/listar-animais-tutor.html', context)
 
-def cad_info_extra(request, tutor_id, animal_id):
-    info_extras_form = Form_Info_Extras(initial={'animal':Animal.objects.get(pk=animal_id).id})
+def cad_infos_extras(request, tutor_id, animal_id):
+    animal = Animal.objects.get(pk=animal_id)
+    try:
+        info = Informacoes_Extras.objects.get(animal=animal.id)
+        if info:
+            info_extras_form = Form_Info_Extras(instance=info)
+    except:
+        info_extras_form = Form_Info_Extras(initial={'animal':Animal.objects.get(pk=animal_id).id})
     context = {
-        'info_extras_form':info_extras_form
+        'info_extras_form':info_extras_form,
+        'animal':animal
     }
+    if request.method == "POST":
+        if info:
+            info_extras_form = Form_Info_Extras(request.POST, instance=info)
+        else:
+            info_extras_form = Form_Info_Extras(request.POST)
+        if info_extras_form.is_valid():
+            info_extras_form.save()
     return render(request, 'adm/info-extra-cadastrar.html', context)
+
+def cad_catalogo_animal(request):
+    animal_catalogo_form = Form_Catalogo()
+    if request.method == "POST":
+        animal_catalogo_form = Form_Catalogo(request.POST)
+        if animal_catalogo_form.is_valid():
+            animal_catalogo_form.save()
+    context = {
+        'animal_catalogo_form':animal_catalogo_form
+    }
+    return render(request, 'adm/animal-catalogo-cadastrar.html', context)
+

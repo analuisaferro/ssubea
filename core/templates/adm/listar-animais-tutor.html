@@ -5,7 +5,7 @@
 {% load bootstrap5 %}
 <div class="row">
     <div class="col">
-        <h2>Listar animais</h2>
+        <h2>Animais de {{tutor}}</h2>
         <table class=" pt-5 table table-hover">
             <thead>
                 <tr>
@@ -46,7 +46,7 @@
                     {% else %}
                     <td>-</td>
                     {% endif %}
-                    <td><a href="{% url 'cadastrar info extra' animal.tutor_id animal.id %}"><i class="fa-solid fa-eye"></i></a></td>
+                    <td><a href="{% url 'cadastrar info' animal.tutor_id animal.id %}"><i class="fa-solid fa-eye"></i></a></td>
                 </tr>
             {% endfor %}
         </table>

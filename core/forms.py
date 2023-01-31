@@ -44,13 +44,21 @@ class Form_Errante(ModelForm):
 
 class Form_Info_Extras(ModelForm):
     class Meta:
-        model = Info_Extras
-        fields = ['alimentacao_tipo', 'alimentacao_periodo', 'condicoes', 'dt_vacinacao', 'dt_vermifugacao', 'complemento', 'dt_registro']
+        model = Informacoes_Extras
+        fields = ['alimentacao_tipo', 'alimentacao_periodo', 'condicoes', 'dt_vacinacao', 'dt_vermifugacao', 'complemento', 'dt_registro', 'animal']
         widgets = {
-            'alimentacao_periodo':forms.RadioSelect(),
+            'alimentacao_periodo':forms.CheckboxSelectMultiple(),
             'dt_vacinacao':forms.TextInput(attrs={'type':'date'}),
             'dt_vermifugacao':forms.TextInput(attrs={'type':'date'}),
-            'dt_registro':forms.TextInput(attrs={'type':'date'})
+            'dt_registro':forms.TextInput(attrs={'type':'date'}),
+            'animal':forms.HiddenInput()
+        }
 
-
+class Form_Catalogo(ModelForm):
+    class Meta:
+        model= Catalogo
+        fields = ['pelagem', 'idade', 'raca', 'sexo', 'castrado', 'vacinado']
+        widgets = {
+            'castrado': forms.CheckboxInput(attrs={'role':'switch', 'id':'flexSwitchCheckDefault'}),
+            'vacinado': forms.CheckboxInput()
         }

@@ -47,9 +47,10 @@ class Animal(models.Model):
     anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
-class Info_Extras(models.Model):
+class Informacoes_Extras(models.Model):
     class Meta:
         ordering = ['animal']
+
     animal=models.ForeignKey(Animal, on_delete=models.PROTECT)
     alimentacao_tipo=models.CharField(max_length=128, verbose_name='Tipo de alimentação', blank=True, null=True)
     alimentacao_periodo=models.ManyToManyField(Periodo, verbose_name='Período da alimentação')
@@ -76,4 +77,16 @@ class Errante(models.Model):
     especie=models.ForeignKey(Especie, on_delete=models.PROTECT, blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
+class Catalogo(models.Model):
+    SEXO_CHOICES=[
+        ('m', 'Macho'), 
+        ('f', 'Fêmea'),
+    ]
+
+    pelagem=models.CharField(max_length=64, verbose_name="Pelagem", blank=False, null=False)
+    idade=models.IntegerField(verbose_name='Idade', blank=True, null=True)
+    raca=models.CharField(max_length=64, verbose_name='Raça', blank=True, null=True)
+    sexo=models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name='Sexo do animal', blank=False, null=False)
+    castrado=models.BooleanField(default=False, verbose_name='Castrado')
+    vacinado=models.BooleanField(default=False, verbose_name='Vacinado')
 

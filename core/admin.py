@@ -6,6 +6,7 @@ admin.site.register(Animal)
 admin.site.register(Tutor)
 admin.site.register(Tipo)
 admin.site.register(Periodo)
+admin.site.register(Informacoes_Extras)
 
 # admin.site.register(Especie)
 

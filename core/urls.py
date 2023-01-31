@@ -11,6 +11,6 @@ urlpatterns = [
     path('animal/cadastrar-errante', views.cadastrar_errante, name='Cadastrar errante'),
     path('tutor/', views.listar_tutor, name='listar tutor'),
     path('tutor/<tutor_id>/animais/', views.listar_animal_tutor, name='listar animais tutor'),
-    path('tutor/<tutor_id>/animais/<animal_id>', views.cad_info_extra, name='cadastrar info extra')
-
+    path('tutor/<tutor_id>/animais/<animal_id>', views.cad_infos_extras, name='cadastrar info'),
+    path('catalogo/cadastrar-animal', views.cad_catalogo_animal, name='cadastrar catalogo')
 ]
