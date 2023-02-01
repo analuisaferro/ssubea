@@ -143,8 +143,19 @@ def cad_catalogo_animal(request):
         animal_catalogo_form = Form_Catalogo(request.POST)
         if animal_catalogo_form.is_valid():
             animal_catalogo_form.save()
+            messages.success(request, 'Animal cadastrado com sucesso!')
+            animal_catalogo_form = Form_Catalogo()
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
     context = {
         'animal_catalogo_form':animal_catalogo_form
     }
     return render(request, 'adm/animal-catalogo-cadastrar.html', context)
+
+def catalogo(request):
+    catalogo = Catalogo.objects.all()
+    context = {
+        'catalogo':catalogo
+    }
+    return render(request, 'adm/animal-catalogo.html', context)
 

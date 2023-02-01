@@ -3,6 +3,15 @@
 {% block css %}{% endblock %}
 {% block main %}
 {% load bootstrap5 %}
+{% for message in messages %}
+{% if message.tags == "success" %}
+<div class="alert alert-success" role="alert">
+{% else %}
+<div class="alert alert-danger" role="alert">
+{% endif %}
+    <b>{{message}}</b>
+  </div>
+{% endfor %}
 <div class="row">
     <div class="col">
         <h2>Cadastrar animal para adoção</h2>
