@@ -161,4 +161,4 @@ def catalogo(request):
     return render(request, 'adm/animal-catalogo.html', context)
 
 def teste(request):
-    return render(request, 'tutor/teste.html')
+    return render(request, 'teste2.html')
