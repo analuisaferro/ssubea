@@ -14,13 +14,14 @@ def cadastrar_animal(request):
     animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
     especie_form = Form_Especie()
     if request.method == "POST":
-        animal_form = Form_Animal(request.POST)
+        animal_form = Form_Animal(request.POST, request.FILES)
         especie_form = Form_Especie(request.POST)
         if animal_form.is_valid() and especie_form.is_valid():
             animal = animal_form.save(commit=False)
             v_especie = especie_form.save(commit=False)
-            especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
-            animal.especie = especie
+            especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+            print(especie)
+            animal.especie_id = especie.id
             animal.save()
             animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
 
@@ -52,7 +53,7 @@ def editar_animal(request, id):
             except:
                 one = False
             v_especie = especie_form.save(commit=False)
-            especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+            especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
             animal.especie = especie
             animal.save()
             if one and request.POST['nome_especie'] != especie.nome_especie:
@@ -87,7 +88,7 @@ def cadastrar_errante(request):
             if especie_form.is_valid():
                 errante = errante_form.save(commit=False)
                 v_especie = especie_form.save(commit=False)
-                especie = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+                especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
                 errante.especie = especie
                 errante.save()
 
@@ -159,3 +160,5 @@ def catalogo(request):
     }
     return render(request, 'adm/animal-catalogo.html', context)
 
+def teste(request):
+    return render(request, 'tutor/teste.html')
