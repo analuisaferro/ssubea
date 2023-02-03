@@ -20,7 +20,6 @@ def cadastrar_animal(request):
             animal = animal_form.save(commit=False)
             v_especie = especie_form.save(commit=False)
             especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
-            print(especie)
             animal.especie_id = especie.id
             animal.save()
             animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
@@ -36,7 +35,8 @@ def cadastrar_animal(request):
         'animais':animais,
     }
     return render(request, 'tutor/animal_cadastro.html', context)
-    
+
+@login_required
 def editar_animal(request, id):
     animal = Animal.objects.get(id=id)
     especie = Especie.objects.get(id=animal.especie_id)
@@ -57,10 +57,11 @@ def editar_animal(request, id):
             animal.especie = especie
             animal.save()
             if one and request.POST['nome_especie'] != especie.nome_especie:
-                print(request.POST['nome_especie'])
-                print(especie)
-                especie.delete()
-        return redirect('Cadastrar animal')               
+                try:
+                    especie.delete()
+                except:
+                    pass
+        return redirect('cadastrar animal')               
     context = {
         'animal':animal,
         'animal_form': animal_form,
@@ -68,11 +69,13 @@ def editar_animal(request, id):
     }
     return render(request, 'tutor/animal_editar.html', context)
 
+@login_required
 def deletar_animal(request, id):
     animal = Animal.objects.get(id=id)
     animal.delete()
-    return redirect('Cadastrar animal')
+    return redirect('cadastrar animal')
 
+@login_required
 def cadastrar_errante(request):
     errante_form = Form_Errante()
     especie_form = Form_Especie()
@@ -82,7 +85,7 @@ def cadastrar_errante(request):
         'especie_form': especie_form
     }
     if request.method == "POST":
-        errante_form = Form_Errante(request.POST)
+        errante_form = Form_Errante(request.POST, request.FILES)
         especie_form = Form_Especie(request.POST)
         if errante_form.is_valid():
             if especie_form.is_valid():
@@ -99,6 +102,7 @@ def cadastrar_errante(request):
     }
     return render(request, 'adm/animal-errante-cadastro.html', context)
 
+@login_required
 def listar_tutor(request):
     tutores = Tutor.objects.all()
     qntd = Tutor.objects.all().count()
@@ -108,6 +112,7 @@ def listar_tutor(request):
     }
     return render(request, 'adm/listar-tutores.html', context)
 
+@login_required
 def listar_animal_tutor(request, tutor_id):
     animais = Animal.objects.filter(tutor_id=tutor_id)
     tutor = Tutor.objects.get(pk=tutor_id).nome
@@ -117,6 +122,7 @@ def listar_animal_tutor(request, tutor_id):
     }
     return render(request, 'adm/listar-animais-tutor.html', context)
 
+@login_required
 def cad_infos_extras(request, tutor_id, animal_id):
     animal = Animal.objects.get(pk=animal_id)
     try:
@@ -138,10 +144,11 @@ def cad_infos_extras(request, tutor_id, animal_id):
             info_extras_form.save()
     return render(request, 'adm/info-extra-cadastrar.html', context)
 
+@login_required
 def cad_catalogo_animal(request):
     animal_catalogo_form = Form_Catalogo()
     if request.method == "POST":
-        animal_catalogo_form = Form_Catalogo(request.POST)
+        animal_catalogo_form = Form_Catalogo(request.POST, request.FILES)
         if animal_catalogo_form.is_valid():
             animal_catalogo_form.save()
             messages.success(request, 'Animal cadastrado com sucesso!')
@@ -153,12 +160,10 @@ def cad_catalogo_animal(request):
     }
     return render(request, 'adm/animal-catalogo-cadastrar.html', context)
 
+@login_required
 def catalogo(request):
     catalogo = Catalogo.objects.all()
     context = {
         'catalogo':catalogo
     }
-    return render(request, 'adm/animal-catalogo.html', context)
-
-def teste(request):
-    return render(request, 'teste2.html')
+    return render(request, 'tutor/animal-catalogo.html', context)

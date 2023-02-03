@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col">
         <h2>Cadastrar animal errante</h2>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form errante_form %}
         {% bootstrap_form especie_form %} 

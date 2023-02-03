@@ -57,7 +57,7 @@ class Form_Info_Extras(ModelForm):
 class Form_Catalogo(ModelForm):
     class Meta:
         model= Catalogo
-        fields = ['pelagem', 'idade', 'raca', 'sexo', 'castrado', 'vacinado']
+        fields = ['pelagem', 'idade', 'raca', 'sexo', 'castrado', 'vacinado', 'animal_image']
         widgets = {
             'castrado': forms.CheckboxInput(attrs={'role':'switch', 'id':'flexSwitchCheckDefault'}),
             'vacinado': forms.CheckboxInput()

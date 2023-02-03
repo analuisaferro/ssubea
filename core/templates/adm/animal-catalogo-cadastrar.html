@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col">
         <h2>Cadastrar animal para adoção</h2>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form animal_catalogo_form %} 
         <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>

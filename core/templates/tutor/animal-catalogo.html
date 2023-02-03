@@ -1,0 +1,25 @@
+{% extends 'template.html' %}
+{% block title %}SSUBEA{% endblock %}
+{% block css %}{% endblock %}
+{% block main %}
+{% load bootstrap5 %}
+<div class="row">
+    <div class="col">
+        <h2>Algo!</h2>
+    </div>
+</div>
+<div class="d-flex justify-content-around">
+    {% for animal in catalogo %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{animal.animal_image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">sem ideia</h5>
+          <p class="card-text">{% if animal.sexo == 'm' %}Macho{% else %}Fêmea{% endif %}, {{animal.idade}} {% if animal.idade == 1 %}ano{% else %}anos{% endif %}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+<script>
+</script>
+{% endblock %}

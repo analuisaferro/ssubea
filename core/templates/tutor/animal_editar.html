@@ -9,10 +9,10 @@
     </div>
     <div class="col d-flex flex-row-reverse">
         <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#excluir"><i class="fa-solid fa-trash-can"></i>  Deletar</a>
-        <a href="{% url 'Cadastrar animal' %}" class="btn btn-outline-primary mx-2"><i class="fa-solid fa-rotate-left"></i>  Voltar</a>
+        <a href="{% url 'cadastrar animal' %}" class="btn btn-outline-primary mx-2"><i class="fa-solid fa-rotate-left"></i>  Voltar</a>
     </div>
 </div>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 {% bootstrap_form animal_form %}
 {% bootstrap_form especie_form %} 
@@ -30,7 +30,7 @@
             <p class="text-center"><b>Tem certeza que deseja excluir este registro?</b></p>
         </div>
         <div class="modal-footer border-0">
-          <a href="{% url 'Deletar animal' animal.id %}" class="btn btn-danger">Sim, tenho certeza.</a>
+          <a href="{% url 'deletar animal' animal.id %}" class="btn btn-danger">Sim, tenho certeza.</a>
         </div>
       </div>
     </div>
