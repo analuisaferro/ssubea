@@ -8,18 +8,25 @@
         <h2>Algo!</h2>
     </div>
 </div>
-<div class="d-flex justify-content-around">
+    <div class="row mx-auto px-5">
+        <div class="d-flex justify-content-evenly">
     {% for animal in catalogo %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{animal.animal_image.url}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">sem ideia</h5>
-          <p class="card-text">{% if animal.sexo == 'm' %}Macho{% else %}Fêmea{% endif %}, {{animal.idade}} {% if animal.idade == 1 %}ano{% else %}anos{% endif %}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="item">
+        <div class="d-img">
+          <img src="{{animal.animal_image.url}}" class="img-fluid rounded-3">
+        </div>
+        <div class="c-text mx-2 d-flex flex-column py-1">
+          <h5>{{animal.raca}}</h5>
+          <p class="card-text">{% if animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %},
+             {{animal.idade}} {% if animal.idade == 1 %}ano.{% else %}anos.{% endif %}
+
+            </p>
+          <button class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</button>
         </div>
       </div>
     {% endfor %}
-</div>
+    </div>
+    </div>
 <script>
 </script>
 {% endblock %}

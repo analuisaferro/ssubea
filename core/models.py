@@ -81,8 +81,8 @@ class Errante(models.Model):
 
 class Catalogo(models.Model):
     SEXO_CHOICES=[
-        ('m', 'Macho'), 
-        ('f', 'Fêmea'),
+        ('o', 'Macho'), 
+        ('a', 'Fêmea'),
     ]
 
     pelagem=models.CharField(max_length=64, verbose_name="Pelagem", blank=False, null=False)
