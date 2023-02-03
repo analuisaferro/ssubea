@@ -92,4 +92,3 @@ class Catalogo(models.Model):
     castrado=models.BooleanField(default=False, verbose_name='Castrado')
     vacinado=models.BooleanField(default=False, verbose_name='Vacinado')
     animal_image = models.ImageField(upload_to='animal_catalogo/', verbose_name="Foto do animal (opcional)", blank=True, null=True)
-
