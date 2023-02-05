@@ -11,7 +11,11 @@ def index(request):
 
 @login_required
 def cadastrar_animal(request):
-    animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+    try:
+        animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+    except:
+        messages.error(request, 'Você não é cadastrado como tutor!')
+        return redirect('cadastrar usuário')
     especie_form = Form_Especie()
     if request.method == "POST":
         animal_form = Form_Animal(request.POST, request.FILES)
