@@ -15,5 +15,5 @@ urlpatterns = [
     path('catalogo/', views.catalogo, name='catalogo'),
     path('catalogo/cadastrar', views.cad_catalogo_animal, name='cadastrar catalogo'),
     path('teste/', views.resgatarToken, name='yoo'),
-    path('adm/descontar-token', views.descontarToken, name='descontar token')
+    path('adm/descontar-token', views.descontarToken, name='descontar token'),
 ]

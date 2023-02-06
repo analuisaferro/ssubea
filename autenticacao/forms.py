@@ -18,3 +18,13 @@ class Form_Tutor(ModelForm):
     def clean_cpf(self):
         cpf = validate_cpf(self.cleaned_data["cpf"])
         return cpf
+
+    def clean_telefone(self):
+        telefone = self.cleaned_data["telefone"]
+        telefone = telefone.replace('(', '')
+        telefone = telefone.replace(' ', '')
+        telefone = telefone.replace(')', '')
+        telefone = telefone.replace('-', '')
+        return telefone
+
+

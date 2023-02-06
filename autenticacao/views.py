@@ -44,8 +44,7 @@ def cadastro_user(request):
                         # salvando pra mais tarde::
                         userid = user.id
                         user.save()
-                        form_tutor.save()
-                        tutor = Tutor.objects.get(email=request.POST['email'])
+                        tutor = form_tutor.save(commit=False)
                         tutor.user_id = userid
                         tutor.save()
                         messages.success(request, 'Usuário cadastrado com sucesso!')
@@ -53,7 +52,7 @@ def cadastro_user(request):
                     except Exception as e:
                         #acredito que só cai aqui se já existir
                         messages.error(request, 'Email de usuário já cadastrado')
-                messages.error(request, 'A senha deve possuir pelo menos 8 caracteres')
+                messages.error(request, 'A senha deve possuir pelo menos 9 caracteres')
             else:
                 #as senhas não se coincidem
                 messages.error(request, 'As senhas digitadas não se coincidem')

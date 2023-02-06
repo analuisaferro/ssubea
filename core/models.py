@@ -94,10 +94,10 @@ class Catalogo(models.Model):
     animal_image = models.ImageField(upload_to='animal_catalogo/', verbose_name="Foto do animal (opcional)", blank=True, null=True)
 
 
-#talvez incluir o id do animal para ajudar (to incluindo)
 #não sei quantos vão ser por tutor, mas por enquanto é um
 #acho que dar mais de um seria um incentivo p cadastrar
 class TokenDesconto(models.Model):
     token = models.CharField(max_length=12, unique=True)
     used = models.BooleanField(default=False)
     dt_inclusao = models.DateField(auto_now_add=True)
+

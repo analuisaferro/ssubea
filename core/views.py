@@ -177,10 +177,10 @@ def catalogo(request):
 @login_required
 def resgatarToken(request):
     tutor = Tutor.objects.get(user=request.user)
-    print(type(tutor.id))
     token = generateToken(tutor.id)
     new = TokenDesconto.objects.create(token=token)
-    print(new.token)
+    
+
 
 @login_required
 def descontarToken(request):
