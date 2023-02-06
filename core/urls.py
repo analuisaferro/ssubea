@@ -14,4 +14,6 @@ urlpatterns = [
     path('tutor/<tutor_id>/animais/<animal_id>', views.cad_infos_extras, name='cadastrar info'),
     path('catalogo/', views.catalogo, name='catalogo'),
     path('catalogo/cadastrar', views.cad_catalogo_animal, name='cadastrar catalogo'),
+    path('teste/', views.resgatarToken, name='yoo'),
+    path('adm/descontar-token', views.descontarToken, name='descontar token')
 ]

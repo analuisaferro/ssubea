@@ -4,10 +4,12 @@ from django.contrib import messages
 from django.db.models import Count
 from .models import *
 from .forms import *
+from .functions import generateToken
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
 
 @login_required
 def cadastrar_animal(request):
@@ -75,7 +77,7 @@ def editar_animal(request, id):
 
 @login_required
 def deletar_animal(request, id):
-    animal = Animal.objects.get(id=id)
+    animal = Animal.objects.get(pk=id)
     animal.delete()
     return redirect('cadastrar animal')
 
@@ -171,3 +173,29 @@ def catalogo(request):
         'catalogo':catalogo
     }
     return render(request, 'tutor/animal-catalogo.html', context)
+
+@login_required
+def resgatarToken(request):
+    tutor = Tutor.objects.get(user=request.user)
+    print(type(tutor.id))
+    token = generateToken(tutor.id)
+    new = TokenDesconto.objects.create(token=token)
+    print(new.token)
+
+@login_required
+def descontarToken(request):
+    if request.method == 'POST':
+        token = request.POST['token']
+        print(token)
+        try:
+            verify = TokenDesconto.objects.get(token=token)
+        except:
+            messages.error(request, 'Código promocional inválido.')
+            return render(request, 'adm/descontar-token.html')
+        if verify.used:
+            messages.error(request, 'Código promocional já utilizado.')
+        else:
+            verify.used = True
+            verify.save()
+            messages.success(request, 'Código promocional ativado com sucesso!')
+    return render(request, 'adm/descontar-token.html')

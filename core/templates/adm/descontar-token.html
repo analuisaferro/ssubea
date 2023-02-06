@@ -1,0 +1,31 @@
+{% extends 'template.html' %}
+{% block title %}SSUBEA{% endblock %}
+{% block css %}{% endblock %}
+{% block main %}
+{% load bootstrap5 %}
+{% for message in messages %}
+{% if message.tags == "success" %}
+<div class="alert alert-success" role="alert">
+{% else %}
+<div class="alert alert-danger" role="alert">
+{% endif %}
+    <b>{{message}}</b>
+  </div>
+{% endfor %}
+<div class="row">
+    <div class="col">
+        <h2>Descontar Token</h2>
+        <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="mb-2" for="discountToken">
+                tenho uma certa dificuldade com nomes...
+            </label>
+            <input required class="form-control" type="text" name="token" id="id_token">
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Validar</button>
+        </form>
+    </div>
+<script>
+</script>
+{% endblock %}
