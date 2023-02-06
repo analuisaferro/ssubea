@@ -179,6 +179,8 @@ def resgatarToken(request):
     tutor = Tutor.objects.get(user=request.user)
     token = generateToken(tutor.id)
     new = TokenDesconto.objects.create(token=token)
+    new.save()
+    print(new)
     
 
 

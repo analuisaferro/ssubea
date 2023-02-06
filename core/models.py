@@ -2,17 +2,6 @@ from django.db import models
 from autenticacao.models import *
 # Create your models here.
 
-class Tutor(models.Model):
-
-    def __str__(self):
-        return '%s' % (self.email)
-
-    TIPO_DE_MORADIA_CHOICES=[
-        ('Própria', 'Própria'), 
-        ('Alugada', 'Alugada'),
-    ]
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
 
 class Tipo(models.Model):
 
