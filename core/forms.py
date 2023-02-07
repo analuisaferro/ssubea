@@ -62,3 +62,7 @@ class Form_Catalogo(ModelForm):
             'castrado': forms.CheckboxInput(attrs={'role':'switch', 'id':'flexSwitchCheckDefault'}),
             'vacinado': forms.CheckboxInput()
         }
+
+class Form_EntrevistaPrevia(ModelForm):
+    class Meta:
+        model = EntrevistaPrevia
