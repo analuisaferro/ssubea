@@ -101,24 +101,36 @@ class TokenDesconto(models.Model):
     dt_inclusao = models.DateField(auto_now_add=True)
 
 class EntrevistaPrevia(models.Model):
-
+    ESCOLHAS_CHOICES=[
+        (True, 'SIM'),
+        (False, 'NÃO')
+    ]
+    
+    animal = models.ForeignKey(Catalogo, on_delete=models.CASCADE)
     nome=models.CharField(max_length=64, verbose_name='Nome', blank=False, null=False)
     cpf=models.CharField(max_length=14, verbose_name='CPF', blank=False, null=False, unique=True)
     telefone=models.CharField(max_length=15, verbose_name='Telefone', blank=True, null=True)
     bairro=models.CharField(max_length=64, verbose_name='Bairro', blank=False, null=False)
     endereco=models.CharField(max_length=128, verbose_name='Endereco', blank=False, null=False)
-    quest_um=models.CharField(max_length=128, verbose_name='Porque você quer adotar um animal?',blank=False, null=False)
-    quest_dois=models.BooleanField(default=False, verbose_name='Todas as pessoas que residem na casa gostam de animais?')
-    quest_tres=models.BooleanField(default=False, verbose_name='A residência que pretende acolher o animal tem o quintal completamente fechado?')
-    quest_quatro=models.BooleanField(default=False, verbose_name='Você tem consciência de que filhotes exigem cuidados especiais, pois podem chorar, destruir objetos da casa e precisagem de um tempo de adaptação?')
-    quest_cinco=models.BooleanField(default=False, verbose_name='Você tem condições de tratar o animal com ração de qualidade e água limpa diariamente?')
-    quest_seis=models.BooleanField(default=False, verbose_name='Você compromete-se com os cuidados veterinários necessários, além da vacinação anual do animal?')
-    quest_sete=models.BooleanField(default=False, verbose_name='Você tem consciência de que um animal vive cerca de 15 anos e que voc~e teá responsabilidade sobre sua vida durante todo esse tempo?')
-    quest_oito=models.BooleanField(default=False, verbose_name='Você tem plena consciência de que precisará higienizar, diariamente, o espaço onde o animal viverá, estando sujeito ao contato com suas necessidades fisiológicas?')
-    quest_nove=models.BooleanField(default=False, verbose_name='Você tem consciência de que, às vezes o animal poderá fazer suas necessidades em local indesejado?')
-    quest_dez=models.BooleanField(default=False, verbose_name='Você tem consciência de que, como fiel depositário do animal, ele não pode ser doado, vendido ou abandonado sob NENHUMA hipótese?')
+    quest_um=models.CharField(choices=ESCOLHAS_CHOICES, max_length=128, verbose_name='Porque você quer adotar um animal?',blank=False, null=False)
+    quest_dois=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Todas as pessoas que residem na casa gostam de animais?')
+    quest_tres=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='A residência que pretende acolher o animal tem o quintal completamente fechado?')
+    quest_quatro=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que filhotes exigem cuidados especiais, pois podem chorar, destruir objetos da casa e precisagem de um tempo de adaptação?')
+    quest_cinco=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem condições de tratar o animal com ração de qualidade e água limpa diariamente?')
+    quest_seis=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você compromete-se com os cuidados veterinários necessários, além da vacinação anual do animal?')
+    quest_sete=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que um animal vive cerca de 15 anos e que voc~e teá responsabilidade sobre sua vida durante todo esse tempo?')
+    quest_oito=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem plena consciência de que precisará higienizar, diariamente, o espaço onde o animal viverá, estando sujeito ao contato com suas necessidades fisiológicas?')
+    quest_nove=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, às vezes o animal poderá fazer suas necessidades em local indesejado?')
+    quest_dez=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, como fiel depositário do animal, ele não pode ser doado, vendido ou abandonado sob NENHUMA hipótese?')
 
+class Tutor(models.Model):
 
+    TIPO_DE_MORADIA_CHOICES=[
+        ('Própria', 'Própria'), 
+        ('Alugada', 'Alugada'),
+    ]
+    pessoa=models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
 
 
 

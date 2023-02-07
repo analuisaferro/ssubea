@@ -6,13 +6,19 @@ from django.contrib.auth.models import User
 
 class Tutor(models.Model):
 
-    def __str__(self):
-        return '%s' % (self.email)
-
     TIPO_DE_MORADIA_CHOICES=[
         ('Própria', 'Própria'), 
         ('Alugada', 'Alugada'),
     ]
+    pessoa=models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
+
+
+class Pessoa(models.Model):
+
+    def __str__(self):
+        return '%s' % (self.email)
+    
     user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     nome=models.CharField(max_length=64, verbose_name='Nome', blank=False, null=False)
     email=models.EmailField()
@@ -22,5 +28,4 @@ class Tutor(models.Model):
     bairro=models.CharField(max_length=64, verbose_name='Bairro', blank=False, null=False)
     endereco=models.CharField(max_length=128, verbose_name='Endereco', blank=False, null=False)
     complemento=models.CharField(max_length=128, verbose_name='Complemento', blank=False, null=False)
-    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')

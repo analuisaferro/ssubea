@@ -166,13 +166,13 @@ def cad_catalogo_animal(request):
     }
     return render(request, 'adm/animal-catalogo-cadastrar.html', context)
 
-@login_required
+
 def catalogo(request):
     catalogo = Catalogo.objects.all()
     context = {
         'catalogo':catalogo
     }
-    return render(request, 'tutor/animal-catalogo.html', context)
+    return render(request, 'catalogo/animal-catalogo.html', context)
 
 @login_required
 def resgatarToken(request):
@@ -201,3 +201,12 @@ def descontarToken(request):
             verify.save()
             messages.success(request, 'Código promocional ativado com sucesso!')
     return render(request, 'adm/descontar-token.html')
+
+@login_required
+def entrevistaAdocao(request, id):
+    entrevistaPrevia_Form = Form_EntrevistaPrevia()
+    context = {
+        'entrevistaPrevia_Form': entrevistaPrevia_Form
+    }
+    return render(request, 'catalogo/entrevista.html', context)
+    

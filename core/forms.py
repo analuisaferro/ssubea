@@ -66,3 +66,8 @@ class Form_Catalogo(ModelForm):
 class Form_EntrevistaPrevia(ModelForm):
     class Meta:
         model = EntrevistaPrevia
+        exclude = []
+        widgets = {
+            'animal':forms.HiddenInput(),
+            'quest_dois':forms.CheckboxInput()
+        }
