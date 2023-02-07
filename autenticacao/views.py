@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from .forms import *
+from core.models import *
+from core.forms import Form_Tutor
 
 # Create your views here.
 

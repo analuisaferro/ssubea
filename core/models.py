@@ -2,6 +2,14 @@ from django.db import models
 from autenticacao.models import *
 # Create your models here.
 
+class Tutor(models.Model):
+
+    TIPO_DE_MORADIA_CHOICES=[
+        ('Própria', 'Própria'), 
+        ('Alugada', 'Alugada'),
+    ]
+    pessoa=models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
 
 class Tipo(models.Model):
 
@@ -123,14 +131,7 @@ class EntrevistaPrevia(models.Model):
     quest_nove=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, às vezes o animal poderá fazer suas necessidades em local indesejado?')
     quest_dez=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, como fiel depositário do animal, ele não pode ser doado, vendido ou abandonado sob NENHUMA hipótese?')
 
-class Tutor(models.Model):
 
-    TIPO_DE_MORADIA_CHOICES=[
-        ('Própria', 'Própria'), 
-        ('Alugada', 'Alugada'),
-    ]
-    pessoa=models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
 
 
 

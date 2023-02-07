@@ -4,16 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Tutor(models.Model):
-
-    TIPO_DE_MORADIA_CHOICES=[
-        ('Própria', 'Própria'), 
-        ('Alugada', 'Alugada'),
-    ]
-    pessoa=models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    tipo_de_moradia=models.CharField(max_length=7, choices=TIPO_DE_MORADIA_CHOICES, verbose_name='Tipo de moradia', blank=False, null=False)
-
-
 class Pessoa(models.Model):
 
     def __str__(self):
