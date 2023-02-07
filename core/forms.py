@@ -10,7 +10,7 @@ class Form_Tutor(ModelForm):
         widgets = {
             'pessoa':forms.HiddenInput(),
         }
-        fields = ['tipo_de_moradia']
+        fields = ['tipo_de_moradia', 'pessoa']
     
     def clean_cpf(self):
         cpf = validate_cpf(self.cleaned_data["cpf"])

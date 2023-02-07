@@ -22,7 +22,7 @@
              {{animal.idade}} {% if animal.idade == 1 %}ano.{% else %}anos.{% endif %}
 
             </p>
-            <a href="{% url 'entrevista adocao' animal.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>
+            <a href="{% url 'entrevista_adocao' animal.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>
         </div>
       </div>
     {% endfor %}

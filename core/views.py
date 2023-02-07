@@ -7,9 +7,36 @@ from .forms import *
 from .functions import generateToken
 
 # Create your views here.
+def cadastro_tutor(request):
+    if request.user.is_authenticated:
+        pessoa = Pessoa.objects.get(user_id=request.user.id)
+        try:
+            tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+            verify = True
+        except:
+            verify = False
+
+        if not verify:
+            print(pessoa)
+            form_tutor = Form_Tutor(initial={'pessoa':pessoa})
+        else:
+            return redirect('index')
+    else:
+        return redirect('cadastrar_usuario')
+    if request.method == "POST":
+        form_tutor = Form_Tutor(request.POST)
+        if form_tutor.is_valid():
+            form_tutor.save()
+            return redirect('index')
+    context={
+        'form_tutor':form_tutor
+    }
+    return render(request, 'autenticacao/completar-cadastro.html', context)
+
+
+
 def index(request):
     return render(request, 'index.html')
-
 
 @login_required
 def cadastrar_animal(request):
@@ -67,7 +94,7 @@ def editar_animal(request, id):
                     especie.delete()
                 except:
                     pass
-        return redirect('cadastrar animal')               
+        return redirect('cadastrar_animal')               
     context = {
         'animal':animal,
         'animal_form': animal_form,
@@ -79,7 +106,7 @@ def editar_animal(request, id):
 def deletar_animal(request, id):
     animal = Animal.objects.get(pk=id)
     animal.delete()
-    return redirect('cadastrar animal')
+    return redirect('cadastrar_animal')
 
 @login_required
 def cadastrar_errante(request):
