@@ -39,7 +39,7 @@
         {% endif %} 
             <form class="pt-3" method="POST">
                 {% csrf_token %}
-                {% bootstrap_form form_tutor %} 
+                {% bootstrap_form form_pessoa %} 
 
                 {% if error_senha.0 %}     
                 <p class="bg-danger text-white text-center py-2 mt-4 text-wrap" style="font-size: 11pt;">

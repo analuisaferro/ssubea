@@ -3,8 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from .forms import *
-from core.models import *
-from core.forms import Form_Tutor
+
 
 # Create your views here.
 
@@ -34,10 +33,10 @@ def logout_view(request):
         return redirect('/')
 
 def cadastro_user(request):
-    form_tutor = Form_Tutor()
+    form_pessoa = Form_Pessoa()
     if request.method == "POST":
-        form_tutor = Form_Tutor(request.POST)
-        if form_tutor.is_valid():
+        form_pessoa = Form_Pessoa(request.POST)
+        if form_pessoa.is_valid():
             if request.POST['password'] == request.POST['password2']:
                 if len(request.POST['password']) >= 8:
                     try:
@@ -46,9 +45,9 @@ def cadastro_user(request):
                         # salvando pra mais tarde::
                         userid = user.id
                         user.save()
-                        tutor = form_tutor.save(commit=False)
-                        tutor.user_id = userid
-                        tutor.save()
+                        pessoa = form_pessoa.save(commit=False)
+                        pessoa.user_id = userid
+                        pessoa.save()
                         messages.success(request, 'Usuário cadastrado com sucesso!')
                         return redirect('/login')
                     except Exception as e:
@@ -59,6 +58,6 @@ def cadastro_user(request):
                 #as senhas não se coincidem
                 messages.error(request, 'As senhas digitadas não se coincidem')
     context = {
-        'form_tutor': form_tutor,
+        'form_pessoa': form_pessoa,
     }
     return render(request, 'adm/cadastro.html', context)

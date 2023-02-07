@@ -2,19 +2,16 @@ import unicodedata
 from django import forms
 from django.forms import ModelForm, ModelChoiceField
 from .models import *
+from .functions import validate_cpf
 
 class Form_Tutor(ModelForm):
     class Meta:
         model = Tutor
         widgets = {
-            'dt_nascimento':forms.TextInput(attrs={'type':'date'}),
-            'cpf':forms.TextInput(attrs={'onkeydown':'mascara(this, icpf)'}),
-            'telefone':forms.TextInput(attrs={'onkeydown':'mascara(this, itel)'})
-
-
+            'pessoa':forms.HiddenInput(),
         }
-        exclude = ['dt_inclusao', 'user']
-
+        fields = ['tipo_de_moradia']
+    
     def clean_cpf(self):
         cpf = validate_cpf(self.cleaned_data["cpf"])
         return cpf
