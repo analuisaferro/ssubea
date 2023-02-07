@@ -41,10 +41,12 @@ def index(request):
 @login_required
 def cadastrar_animal(request):
     try:
-        animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+        pessoa = Pessoa.objects.get(user_id=request.user.id)
+        tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+        animal_form = Form_Animal(initial={'tutor':tutor})
     except:
         messages.error(request, 'Você não é cadastrado como tutor!')
-        return redirect('cadastrar usuário')
+        return redirect('completar_cadastro')
     especie_form = Form_Especie()
     if request.method == "POST":
         animal_form = Form_Animal(request.POST, request.FILES)
@@ -55,9 +57,9 @@ def cadastrar_animal(request):
             especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
             animal.especie_id = especie.id
             animal.save()
-            animal_form = Form_Animal(initial={'tutor':Tutor.objects.get(user=request.user).id})
+            animal_form = Form_Animal(initial={'tutor':tutor})
 
-    tutor = Tutor.objects.get(user=request.user.id)
+
     try:
         animais = Animal.objects.filter(tutor=tutor)
     except:
@@ -148,7 +150,7 @@ def listar_tutor(request):
 @login_required
 def listar_animal_tutor(request, tutor_id):
     animais = Animal.objects.filter(tutor_id=tutor_id)
-    tutor = Tutor.objects.get(pk=tutor_id).nome
+    tutor = Tutor.objects.get(pk=tutor_id).pessoa.nome
     context = {
         'animais':animais,
         'tutor':tutor

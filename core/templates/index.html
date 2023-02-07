@@ -2,20 +2,22 @@
 {% load static %}
 {% block main %}
 <div class="container">
-<div class="row">
-  <h2 class="ms-4 py-1">Destaque</h2>
-</div>
-<div class="row">
-  <div class="d-flex">
-    <div class="img-destaque">
-      <img src="{% static 'images/capacitanf.png' %}" class="img-fluid">
-    </div>
-    <div class="text-destaque my-4 mx-4 d-flex flex-column">
-      <h5 class="mb-1">Capacita Nova Friburgo</h5>
-      <p class="time">03/02/2023 - 28/02/2023 - 17:00 - 21:00</p>
-      <p class="local">Estácio - Nova Friburgo - Rio de Janeiro - Brasil.</p>
-      <p class="inf">Com transmissão online</p>
-      <button class="btn btn-outline-primary btn-details me-auto" id="esp">Detalhes</button>
+<div class="row mx-auto bg-destaque ps-4 pb-5 pt-1">
+  <div class="row">
+    <h2 class="ms-4 py-1">Destaque</h2>
+  </div>
+  <div class="row ">
+    <div class="d-flex bg-white img-txt">
+      <div class="img-destaque">
+        <img src="{% static 'images/capacitanf.png' %}" class="img-fluid">
+      </div>
+      <div class="text-destaque pt-4 pb-0 px-4 d-flex flex-column">
+        <h5 class="mb-1">Capacita Nova Friburgo</h5>
+        <p class="time">03/02/2023 - 28/02/2023 - 17:00 - 21:00</p>
+        <p class="local">Estácio - Nova Friburgo - Rio de Janeiro - Brasil.</p>
+        <p class="inf">Com transmissão online</p>
+        <button class="btn btn-outline-primary btn-details me-auto" id="esp">Detalhes</button>
+      </div>
     </div>
   </div>
 </div>

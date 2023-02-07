@@ -14,6 +14,10 @@ header{
   background-color: white;
 }
 /* header  */
+.bg-destaque{
+  /* background-color: #F8F8F8; */
+  background-color: #f8f8f8;
+}
 #nav-superior{
   height: 38px;
   background-color: #0D578E;
@@ -72,8 +76,8 @@ a{
   border-color: #A92BD4;
 }
 .img-destaque{
-  width: 836px;
-  height: 337px;
+  width: 786px;
+  height: 314px;
 }
 .img-destaque img{
     border-radius: 1.8rem;
@@ -126,6 +130,11 @@ p, h5, ul{
 .text-f{
   text-align: justify;
   max-width: 500px;
+}
+.img-txt{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-radius: 1.8rem;
 }
 #preloading{    
     padding: 12px 20px;
