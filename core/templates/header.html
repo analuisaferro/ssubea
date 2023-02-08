@@ -80,7 +80,7 @@
       <a href="{% url 'cadastrar_animal' %}" class="me-3">
         <div class="d-flex flex-column align-items-center">
           <div class="s-nav rounded-circle"></div>
-          <p class="text-dark text-center">Área<br/>do Tutor</p>
+          <p class="text-dark text-center">Área do Tutor</p>
         </div>
       </a>
       <a href="{% url 'catalogo' %}" class="me-3">
@@ -89,17 +89,19 @@
           <p class="text-dark">Catálogo</p>
         </div>
       </a>
-      {% if request.user.is_staff %}
-      <a href="{% url 'catalogo' %}" class="me-3">
+      {% if user_belongs_to_group or request.user.is_superuser%}
+      <a href="{% url 'descontar_token' %}" class="me-3">
         <div class="d-flex flex-column align-items-center">
           <div class="s-nav rounded-circle destaque"></div>
+          <p class="text-dark">Descontar token</p>
         </div>
       </a>
       {% endif %}
-      {% if request.user.is_superuser %}
-      <a href="/admin">
+      {% if request.user.is_staff %}
+      <a href="{% url 'descontar_token' %}" class="me-3">
         <div class="d-flex flex-column align-items-center">
           <div class="s-nav rounded-circle destaque"></div>
+          <p class="text-dark">Administrativo</p>
         </div>
       </a>
       {% endif %}

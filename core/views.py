@@ -9,15 +9,17 @@ from .functions import generateToken
 # Create your views here.
 def cadastro_tutor(request):
     if request.user.is_authenticated:
-        pessoa = Pessoa.objects.get(user_id=request.user.id)
         try:
-            tutor = Tutor.objects.get(pessoa_id=pessoa.id)
-            verify = True
+            pessoa = Pessoa.objects.get(user_id=request.user.id)
+            if pessoa:
+                tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+                verify = True
+            else:
+                return redirect('cadastrar_usuario')
         except:
             verify = False
 
         if not verify:
-            print(pessoa)
             form_tutor = Form_Tutor(initial={'pessoa':pessoa})
         else:
             return redirect('index')
@@ -40,6 +42,7 @@ def index(request):
 
 @login_required
 def cadastrar_animal(request):
+
     try:
         pessoa = Pessoa.objects.get(user_id=request.user.id)
         tutor = Tutor.objects.get(pessoa_id=pessoa.id)
