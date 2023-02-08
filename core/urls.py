@@ -16,6 +16,6 @@ urlpatterns = [
     path('catalogo/', views.catalogo, name='catalogo'),
     path('catalogo/cadastrar', views.cad_catalogo_animal, name='cadastrar_catalogo'),
     path('catalogo/<id>/entrevista-previa', views.entrevistaAdocao, name='entrevista_adocao'),
-    path('teste/', views.resgatarToken, name='yoo'),
+    path('adm/teste', views.resgatarToken, name='yoo'),
     path('adm/descontar-token', views.descontarToken, name='descontar_token'),
 ]
