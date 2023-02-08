@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import *
-from core.models import Tutor
+from .functions import validate_cpf
 
 class Form_Pessoa(ModelForm):
     class Meta:
@@ -12,4 +12,16 @@ class Form_Pessoa(ModelForm):
             'telefone':forms.TextInput(attrs={'onkeydown':'mascara(this, itel)'})
         }
         fields = ['nome', 'email', 'cpf', 'telefone', 'dt_nascimento', 'bairro', 'endereco', 'complemento']
+
+    def clean_cpf(self):
+        cpf = validate_cpf(self.cleaned_data["cpf"])
+        return cpf
+
+    def clean_telefone(self):
+        telefone = self.cleaned_data["telefone"]
+        telefone = telefone.replace('(', '')
+        telefone = telefone.replace(' ', '')
+        telefone = telefone.replace(')', '')
+        telefone = telefone.replace('-', '')
+        return telefone
 

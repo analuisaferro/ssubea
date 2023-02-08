@@ -2,7 +2,7 @@ import unicodedata
 from django import forms
 from django.forms import ModelForm, ModelChoiceField
 from .models import *
-from .functions import validate_cpf
+from autenticacao.functions import validate_cpf
 
 class Form_Tutor(ModelForm):
     class Meta:
@@ -12,17 +12,7 @@ class Form_Tutor(ModelForm):
         }
         fields = ['tipo_de_moradia', 'pessoa']
     
-    def clean_cpf(self):
-        cpf = validate_cpf(self.cleaned_data["cpf"])
-        return cpf
 
-    def clean_telefone(self):
-        telefone = self.cleaned_data["telefone"]
-        telefone = telefone.replace('(', '')
-        telefone = telefone.replace(' ', '')
-        telefone = telefone.replace(')', '')
-        telefone = telefone.replace('-', '')
-        return telefone
 
 
 
@@ -91,5 +81,26 @@ class Form_EntrevistaPrevia(ModelForm):
         exclude = []
         widgets = {
             'animal':forms.HiddenInput(),
-            'quest_dois':forms.CheckboxInput()
+            'cpf':forms.TextInput(attrs={'onkeydown':'mascara(this,icpf)'}),
+            'telefone':forms.TextInput(attrs={'onkeydown':'mascara(this, itel)'}),
+            'quest_dois':forms.RadioSelect(),
+            'quest_tres':forms.RadioSelect(),
+            'quest_quatro':forms.RadioSelect(),
+            'quest_cinco':forms.RadioSelect(),
+            'quest_seis':forms.RadioSelect(),
+            'quest_sete':forms.RadioSelect(),
+            'quest_oito':forms.RadioSelect(),
+            'quest_nove':forms.RadioSelect(),
+            'quest_dez':forms.RadioSelect(),
         }
+    def clean_cpf(self):
+        cpf = validate_cpf(self.cleaned_data["cpf"])
+        return cpf
+
+    def clean_telefone(self):
+        telefone = self.cleaned_data["telefone"]
+        telefone = telefone.replace('(', '')
+        telefone = telefone.replace(' ', '')
+        telefone = telefone.replace(')', '')
+        telefone = telefone.replace('-', '')
+        return telefone

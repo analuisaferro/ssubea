@@ -193,7 +193,7 @@ def cad_catalogo_animal(request):
     context = {
         'animal_catalogo_form':animal_catalogo_form
     }
-    return render(request, 'adm/animal-catalogo-cadastrar.html', context)
+    return render(request, 'catalogo/animal-catalogo-cadastrar.html', context)
 
 
 def catalogo(request):
@@ -237,5 +237,10 @@ def entrevistaAdocao(request, id):
     context = {
         'entrevistaPrevia_Form': entrevistaPrevia_Form
     }
+    if request.method == "POST":
+        entrevistaPrevia_Form = Form_EntrevistaPrevia(request.POST)
+        if entrevistaPrevia_Form.is_valid():
+            entrevistaPrevia_Form.save()
+            return redirect('index')
     return render(request, 'catalogo/entrevista.html', context)
     

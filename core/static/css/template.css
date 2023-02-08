@@ -77,10 +77,14 @@ a{
 }
 .img-destaque{
   width: 786px;
-  height: 314px;
+  height: 100%;
+  flex-grow: 2;
 }
 .img-destaque img{
     border-radius: 1.8rem;
+}
+.text-destaque{
+  flex-grow: 1;
 }
 .time{
   color: #275CDF;
@@ -132,8 +136,8 @@ p, h5, ul{
   max-width: 500px;
 }
 .img-txt{
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   border-radius: 1.8rem;
 }
 #preloading{    

@@ -120,7 +120,7 @@ class EntrevistaPrevia(models.Model):
     telefone=models.CharField(max_length=15, verbose_name='Telefone', blank=True, null=True)
     bairro=models.CharField(max_length=64, verbose_name='Bairro', blank=False, null=False)
     endereco=models.CharField(max_length=128, verbose_name='Endereco', blank=False, null=False)
-    quest_um=models.CharField(choices=ESCOLHAS_CHOICES, max_length=128, verbose_name='Porque você quer adotar um animal?',blank=False, null=False)
+    quest_um=models.CharField(max_length=128, verbose_name='Porque você quer adotar um animal?',blank=False, null=False)
     quest_dois=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Todas as pessoas que residem na casa gostam de animais?')
     quest_tres=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='A residência que pretende acolher o animal tem o quintal completamente fechado?')
     quest_quatro=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que filhotes exigem cuidados especiais, pois podem chorar, destruir objetos da casa e precisagem de um tempo de adaptação?')
