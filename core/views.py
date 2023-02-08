@@ -12,14 +12,17 @@ def cadastro_tutor(request):
         try:
             pessoa = Pessoa.objects.get(user_id=request.user.id)
             if pessoa:
-                tutor = Tutor.objects.get(pessoa_id=pessoa.id)
-                verify = True
-            else:
-                return redirect('cadastrar_usuario')
+                pass
+        except:
+            return redirect('cadastrar_usuario')
+        try:
+            tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+            verify = True
         except:
             verify = False
 
         if not verify:
+            print(pessoa)
             form_tutor = Form_Tutor(initial={'pessoa':pessoa})
         else:
             return redirect('index')
@@ -42,7 +45,6 @@ def index(request):
 
 @login_required
 def cadastrar_animal(request):
-
     try:
         pessoa = Pessoa.objects.get(user_id=request.user.id)
         tutor = Tutor.objects.get(pessoa_id=pessoa.id)
@@ -205,6 +207,7 @@ def catalogo(request):
         'catalogo':catalogo
     }
     return render(request, 'catalogo/animal-catalogo.html', context)
+
 
 def entrevistaAdocao(request, id):
     animal = Catalogo.objects.get(pk=id)
