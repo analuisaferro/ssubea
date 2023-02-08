@@ -87,6 +87,9 @@ class Errante(models.Model):
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
 class Catalogo(models.Model):
+    def __str__(self):
+        return '%s' % (self.pelagem)
+    
     SEXO_CHOICES=[
         ('o', 'Macho'), 
         ('a', 'Fêmea'),
@@ -116,7 +119,7 @@ class EntrevistaPrevia(models.Model):
     
     animal = models.ForeignKey(Catalogo, on_delete=models.CASCADE)
     nome=models.CharField(max_length=64, verbose_name='Nome', blank=False, null=False)
-    cpf=models.CharField(max_length=14, verbose_name='CPF', blank=False, null=False, unique=True)
+    cpf=models.CharField(max_length=14, verbose_name='CPF', blank=False, null=False)
     telefone=models.CharField(max_length=15, verbose_name='Telefone', blank=True, null=True)
     bairro=models.CharField(max_length=64, verbose_name='Bairro', blank=False, null=False)
     endereco=models.CharField(max_length=128, verbose_name='Endereco', blank=False, null=False)

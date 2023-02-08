@@ -12,6 +12,7 @@ body{
 }
 header{
   background-color: white;
+  border: 1px solid #D9D9D9;
 }
 /* header  */
 .bg-destaque{
@@ -109,14 +110,14 @@ p, h5, ul{
   height: 229px;
   width: 229px;
 }
+.det-img{
+  width: 100%;
+}
 .item{
   width: 229px;
-  transition: all 0.5s ease; 
-
-}
-.item:hover{
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 }
+
 #esp{
   margin-top: 8rem;
   padding-left: 9.5rem;

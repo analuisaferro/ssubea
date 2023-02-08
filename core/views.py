@@ -203,6 +203,22 @@ def catalogo(request):
     }
     return render(request, 'catalogo/animal-catalogo.html', context)
 
+def entrevistaAdocao(request, id):
+    animal = Catalogo.objects.get(pk=id)
+    entrevistaPrevia_Form = Form_EntrevistaPrevia(initial={'animal':animal})
+    if request.method == "POST":
+        entrevistaPrevia_Form = Form_EntrevistaPrevia(request.POST)
+        if entrevistaPrevia_Form.is_valid():
+            entrevistaPrevia_Form.save()
+            messages.success(request, 'Uma orientação?')
+            return redirect('index')
+    context = {
+        'entrevistaPrevia_Form': entrevistaPrevia_Form,
+        'animal':animal
+    }
+    return render(request, 'catalogo/entrevista.html', context)
+    
+
 @login_required
 def resgatarToken(request):
     tutor = Tutor.objects.get(user=request.user)
@@ -210,8 +226,6 @@ def resgatarToken(request):
     new = TokenDesconto.objects.create(token=token)
     new.save()
     print(new)
-    
-
 
 @login_required
 def descontarToken(request):
@@ -231,16 +245,3 @@ def descontarToken(request):
             messages.success(request, 'Código promocional ativado com sucesso!')
     return render(request, 'adm/descontar-token.html')
 
-@login_required
-def entrevistaAdocao(request, id):
-    entrevistaPrevia_Form = Form_EntrevistaPrevia()
-    context = {
-        'entrevistaPrevia_Form': entrevistaPrevia_Form
-    }
-    if request.method == "POST":
-        entrevistaPrevia_Form = Form_EntrevistaPrevia(request.POST)
-        if entrevistaPrevia_Form.is_valid():
-            entrevistaPrevia_Form.save()
-            return redirect('index')
-    return render(request, 'catalogo/entrevista.html', context)
-    
