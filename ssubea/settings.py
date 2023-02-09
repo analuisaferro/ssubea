@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'fontawesomefree',
     #apps
-    'core',
+    'bemestaranimal',
     'autenticacao',
 ]
 
@@ -91,7 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.functions.user_group_loja',
+                'bemestaranimal.functions.user_group_loja',
                 
             ],
         },
