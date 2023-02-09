@@ -7,6 +7,30 @@ from .forms import *
 from .functions import generateToken
 
 # Create your views here.
+
+# def aluno_required(view_func):
+#     @wraps(view_func)
+#     def wrapper(request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             pessoa = ''
+#             aluno = ''
+
+#             try:
+#                 pessoa = Pessoa.objects.get(user=request.user)
+#             except Exception as e:
+#                 return redirect("cadastrar_usuario")
+
+#             try:
+#                 aluno = Aluno.objects.get(pessoa=pessoa)
+#             except Aluno.DoesNotExist:
+#                 return redirect("cadastrar_aluno")
+
+#         else:
+#             return redirect(settings.LOGIN_URL)
+        
+#         return view_func(request, *args, **kwargs)
+#     return wrapper
+
 def cadastro_tutor(request):
     if request.user.is_authenticated:
         try:
@@ -144,11 +168,11 @@ def cadastrar_errante(request):
 
 @login_required
 def listar_tutor(request):
-    tutores = Tutor.objects.all()
     qntd = Tutor.objects.all().count()
+    tutores = Tutor.objects.annotate(num=Count('animal'))
     context = {
         'tutores':tutores,
-        'qntd':qntd
+        'qntd':qntd,
     }
     return render(request, 'adm/listar-tutores.html', context)
 
@@ -268,3 +292,5 @@ def descontarToken(request):
             messages.success(request, 'Código promocional ativado com sucesso!')
     return render(request, 'adm/descontar-token.html')
 
+def teste(request):
+    return render(request, 'adm/administracao.html')

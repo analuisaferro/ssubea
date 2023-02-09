@@ -9,7 +9,7 @@ class Form_Pessoa(ModelForm):
         widgets = {
             'dt_nascimento':forms.TextInput(attrs={'type':'date'}),
             'cpf':forms.TextInput(attrs={'onkeydown':'mascara(this, icpf)'}),
-            'telefone':forms.TextInput(attrs={'onkeydown':'mascara(this, itel)'})
+            'telefone':forms.TextInput(attrs={'onkeydown':'mascara(this, icel)'})
         }
         fields = ['nome', 'email', 'cpf', 'telefone', 'dt_nascimento', 'bairro', 'endereco', 'complemento']
 

@@ -84,10 +84,10 @@
                 v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hifen entre o terceiro e o quarto digitos
                 return v
             }
-            function itel(v){
+            function icel(v){
                         v=v.replace(/\D/g,"")                 //Remove tudo o que nao e digito
                         v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parenteses em volta dos dois primeiros digitos
-                        v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hifen entre o quarto e o quinto digitos
+                        v=v.replace(/(\d{5})(\d)/,"$1-$2")    //Coloca hifen entre o quarto e o quinto digitos
                         return v
                     }
     function mascara(o,f){

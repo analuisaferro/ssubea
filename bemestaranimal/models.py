@@ -52,7 +52,7 @@ class Animal(models.Model):
     sexo=models.CharField(max_length=1, choices=SEXO_CHOICES, verbose_name='Sexo do animal', blank=False, null=False)
     castrado=models.BooleanField(default=False, verbose_name='Castrado')
     anilha=models.CharField(max_length=64, verbose_name='Código da anilha', blank=True, null=True)
-    animal_image = models.ImageField(upload_to='animal_tutor/', verbose_name="Foto do animal (opcional)",blank=True, null=True)
+    animal_image = models.ImageField(upload_to='animal_tutor/', verbose_name="Foto do animal",blank=True, null=True)
     dt_inclusao=models.DateField(auto_now_add=True, verbose_name='Data de inclusão')
 
 class Informacoes_Extras(models.Model):
