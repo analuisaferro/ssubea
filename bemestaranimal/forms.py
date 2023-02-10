@@ -11,10 +11,6 @@ class Form_Tutor(ModelForm):
             'pessoa':forms.HiddenInput(),
         }
         fields = ['tipo_de_moradia', 'pessoa']
-    
-
-
-
 
 class Form_Tipo(ModelForm):
     class Meta:
@@ -45,6 +41,16 @@ class Form_Animal(ModelForm):
                 'tutor': forms.HiddenInput(), 
                 'tipo': forms.RadioSelect()}
         
+class Form_Catalogo(ModelForm):
+    class Meta:
+        model= Catalogo
+        fields = ['animal', 'pelagem', 'vacinado']
+        widgets = {
+            'animal':forms.HiddenInput(),
+            'castrado': forms.CheckboxInput(attrs={'role':'switch', 'id':'flexSwitchCheckDefault'}),
+            'vacinado': forms.CheckboxInput()
+        }
+
 class Form_Errante(ModelForm):
 
     class Meta:
@@ -66,14 +72,6 @@ class Form_Info_Extras(ModelForm):
             'animal':forms.HiddenInput()
         }
 
-class Form_Catalogo(ModelForm):
-    class Meta:
-        model= Catalogo
-        fields = ['nome', 'pelagem', 'idade', 'raca', 'sexo', 'castrado', 'vacinado', 'animal_image']
-        widgets = {
-            'castrado': forms.CheckboxInput(attrs={'role':'switch', 'id':'flexSwitchCheckDefault'}),
-            'vacinado': forms.CheckboxInput()
-        }
 
 class Form_EntrevistaPrevia(ModelForm):
     class Meta:

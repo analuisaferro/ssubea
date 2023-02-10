@@ -6,7 +6,7 @@
 <div class="container pb-5">
     <div class="row pb-2">
         <div class="col">
-            <h2>{% if animal.nome %}{{animal.nome}}{% else %}{{animal.raca}}{% endif %}</h2>
+            <h2>{% if adocao.animal.nome %}{{adocao.animal.nome}}{% else %}{{adocao.raca}}{% endif %}</h2>
         </div>
         <div class="col">
             <h2>Entrevista prévia para adoção</h2>
@@ -16,34 +16,34 @@
         <div class="col d-flex ">
             <div class="">
                 <div class="det-img">
-                <img src="{{animal.animal_image.url}}" class="img-fluid rounded-3">
+                <img src="{{adocao.animal.animal_image.url}}" class="img-fluid rounded-3">
                 </div>
                 <div class="c-text d-flex flex-column">
                 <table class="table">
                     <tbody>
                         <tr>
                             <th>Pelagem</th>
-                            <td>{{animal.pelagem}}</td>
+                            <td>{{adocao.pelagem}}</td>
                         </tr>
                         <tr>
                             <th>Idade</th>
-                            <td>{{animal.idade}} {% if animal.idade == 1 %}ano.{% else %}anos.{% endif %}</td>
+                            <td>{{adocao.animal.idade}} {% if adocao.animal.idade == 1 %}ano.{% else %}anos.{% endif %}</td>
                         </tr>
                         <tr>
                             <th>Raça</th>
-                            <td>{{animal.idade}}</td>
+                            <td>{{adocao.animal.idade}}</td>
                         </tr>
                         <tr>
                             <th>Sexo</th>
-                            <td>{% if animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %}</td>
+                            <td>{% if adocao.animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Castrad{{animal.sexo}}</th>
-                            <td>{% if animal.castrado %}SIM{% else %}NÃO{% endif %}</td>
+                            <th>Castrad{{adocao.animal.sexo}}</th>
+                            <td>{% if adocao.animal.castrado %}SIM{% else %}NÃO{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Vacinad{{animal.sexo}}</th>
-                            <td>{% if animal.vacinado %}SIM{% else %}NÃO{% endif %}</td>
+                            <th>Vacinad{{adocao.animal.sexo}}</th>
+                            <td>{% if adocao.vacinado %}SIM{% else %}NÃO{% endif %}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -52,6 +52,7 @@
         </div>
         <div class="col">
             <form method="POST">
+            {% csrf_token %}
             {% bootstrap_form entrevistaPrevia_Form %}
             <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
             </form>

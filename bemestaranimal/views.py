@@ -87,6 +87,7 @@ def cadastrar_animal(request):
             animal.especie_id = especie.id
             animal.save()
             animal_form = Form_Animal(initial={'tutor':tutor})
+            especie_form = Form_Especie()
 
 
     try:
@@ -210,17 +211,34 @@ def cad_infos_extras(request, tutor_id, animal_id):
 
 @login_required
 def cad_catalogo_animal(request):
+    animal_form = Form_Animal()
+    especie_form = Form_Especie()
     animal_catalogo_form = Form_Catalogo()
     if request.method == "POST":
-        animal_catalogo_form = Form_Catalogo(request.POST, request.FILES)
-        if animal_catalogo_form.is_valid():
-            animal_catalogo_form.save()
-            messages.success(request, 'Animal cadastrado com sucesso!')
-            animal_catalogo_form = Form_Catalogo()
+        especie_form = Form_Especie(request.POST)
+        animal_form = Form_Animal(request.POST, request.FILES)
+        animal_catalogo_form = Form_Catalogo(request.POST)
+        if animal_form.is_valid() and especie_form.is_valid():
+            animal = animal_form.save(commit=False)
+            v_especie = especie_form.save(commit=False)
+            especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
+            animal.especie_id = especie.id
+            animal.save()
+            if animal_catalogo_form.is_valid():
+                animal_adocao = animal_catalogo_form.save(commit=False)
+                animal_adocao.animal=animal
+                animal_adocao.save()
+                messages.success(request, 'Animal cadastrado com sucesso!')
+                animal_form = Form_Animal()
+                especie_form = Form_Especie()
+                animal_catalogo_form = Form_Catalogo()
         else:
             messages.error(request, 'Por favor, corrija os erros abaixo.')
     context = {
-        'animal_catalogo_form':animal_catalogo_form
+        'animal_catalogo_form':animal_catalogo_form,
+        'especie_form':especie_form,
+        'animal_form':animal_form
+
     }
     return render(request, 'catalogo/animal-catalogo-cadastrar.html', context)
 
@@ -244,7 +262,7 @@ def entrevistaAdocao(request, id):
             return redirect('index')
     context = {
         'entrevistaPrevia_Form': entrevistaPrevia_Form,
-        'animal':animal
+        'adocao':animal
     }
     return render(request, 'catalogo/entrevista.html', context)
     
@@ -294,3 +312,6 @@ def descontarToken(request):
 
 def teste(request):
     return render(request, 'adm/administracao.html')
+
+#quantidade de animais castrados e não castrados
+# vacinados (mas não pede essa informação no usuário, só na hora de cadastrar as informações extras)

@@ -11,18 +11,18 @@
 </div>
     <div class="row mx-auto">
         <div class="d-flex flex-wrap">
-    {% for animal in catalogo %}
+    {% for adocao in catalogo %}
     <div class="item mx-2 mb-3">
         <div class="d-img">
-          <img src="{{animal.animal_image.url}}" class="img-fluid rounded-3">
+          <img src="{{adocao.animal.animal_image.url}}" class="img-fluid rounded-3">
         </div>
         <div class="c-text mx-2 d-flex flex-column py-1">
-          <h5>{% if animal.nome %}{{animal.nome}}{% else %}{{animal.raca}}{% endif %}</h5>
-          <p class="card-text">{% if animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %},
-             {{animal.idade}} {% if animal.idade == 1 %}ano.{% else %}anos.{% endif %}
+          <h5>{% if adocao.animal.nome %}{{adocao.animal.nome}}{% else %}{{adocao.raca}}{% endif %}</h5>
+          <p class="card-text">{% if adocao.animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %},
+             {{adocao.animal.idade}} {% if adocao.animal.idade == 1 %}ano.{% else %}anos.{% endif %}
 
             </p>
-            <a href="{% url 'entrevista_adocao' animal.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>
+            <a href="{% url 'entrevista_adocao' adocao.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>
         </div>
       </div>
     {% endfor %}
