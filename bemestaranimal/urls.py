@@ -1,5 +1,3 @@
-
-
 from django.urls import path
 from . import views
 
@@ -18,5 +16,5 @@ urlpatterns = [
     path('catalogo/<id>/entrevista-previa', views.entrevistaAdocao, name='entrevista_adocao'),
     path('adm/gerar-token', views.gerarToken, name='gerar_token'),
     path('adm/descontar-token', views.descontarToken, name='descontar_token'),
-    path('teste', views.teste, name='teste')
+    path('teste', views.teste, name='teste'),
 ]
