@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     #apps
     'bemestaranimal',
     'autenticacao',
+    'administracao',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bemestaranimal.functions.user_group_loja',
+                'administracao.functions.user_group_loja',
                 
             ],
         },
