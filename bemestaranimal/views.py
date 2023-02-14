@@ -62,24 +62,30 @@ def cadastro_tutor(request):
     return render(request, 'autenticacao/completar-cadastro.html', context)
 
 def index(request):
-    return render(request, 'index.html')
+    catalogo = Catalogo.objects.all()[:4]
+    context = {
+        'catalogo':catalogo
+    }
+    return render(request, 'index.html', context)
 
 
 @login_required
 def area_tutor(request):
+    try:
+        pessoa = Pessoa.objects.get(user_id=request.user.id)
+        tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+    except:
+        messages.error(request, 'Você não é cadastrado como tutor!')
+        return redirect('completar_cadastro')
     return render(request, 'tutor/area_tutor.html')
 
 
 
 @login_required
 def cadastrar_animal(request):
-    try:
-        pessoa = Pessoa.objects.get(user_id=request.user.id)
-        tutor = Tutor.objects.get(pessoa_id=pessoa.id)
-        animal_form = Form_Animal(initial={'tutor':tutor})
-    except:
-        messages.error(request, 'Você não é cadastrado como tutor!')
-        return redirect('completar_cadastro')
+    pessoa = Pessoa.objects.get(user_id=request.user.id)
+    tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+    animal_form = Form_Animal(initial={'tutor':tutor})
     especie_form = Form_Especie()
     if request.method == "POST":
         animal_form = Form_Animal(request.POST, request.FILES)
@@ -196,7 +202,5 @@ def resgatar_cupom(request):
     context = {
         'cupom':cupom
     }
-    return render(request, 'resgatar-token.html')
+    return render(request, 'tutor/resgatar-token.html', context)
 
-#quantidade de animais castrados e não castrados
-# vacinados (mas não pede essa informação no usuário, só na hora de cadastrar as informações extras)

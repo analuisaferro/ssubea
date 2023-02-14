@@ -164,7 +164,7 @@ def gerarToken(request):
     }
     return render(request, 'adm/gerar-token.html', context)
 
-@login_required
+@staff_member_required
 def descontarToken(request):
     if request.method == 'POST':
         token = request.POST['token']
@@ -182,3 +182,34 @@ def descontarToken(request):
             messages.success(request, 'Código promocional ativado com sucesso!')
     return render(request, 'adm/descontar-token.html')
 
+@staff_member_required
+def censo(request):
+    animais_tutor = Animal.objects.exclude(tutor=None)
+    animais_tutor.filter(castrado=True)
+    errantes = Errante.objects.all().count()
+    adocao = Catalogo.objects.all().count()
+    tutores = Tutor.objects.all().count()
+    animais = Animal.objects.all()
+    castrados = [
+        {'tipo': 'Castrados', 'quantidade': animais_tutor.filter(castrado=True).count()},
+        {'tipo': 'Não castrados', 'quantidade': animais_tutor.filter(castrado=False).count()}
+    ]
+    Animais = [
+        {'tipo':'Animais c/ tutor', 'quantidade':animais.exclude(tutor=None).count(), 'color':'red'},
+        {'tipo':'Animais p/ adoção', 'quantidade':animais.filter(tutor=None).count(), 'color':'blue'},
+        {'tipo':'Animais errantes', 'quantidade':errantes, 'color':'yellow'}
+
+
+    ]
+    context = {
+        'castrados':castrados,
+        'errantes':errantes,
+        'adocao':adocao,
+        'tutores':tutores,
+        'animais_tutor':animais_tutor.count()
+    }
+    return render(request, 'adm/censo.html', context)
+
+
+#quantidade de animais castrados e não castrados
+# vacinados (mas não pede essa informação no usuário, só na hora de cadastrar as informações extras)

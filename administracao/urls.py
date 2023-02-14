@@ -25,6 +25,7 @@ urlpatterns = [
 
     #adm
     path('administrativo/', views.administrativo, name='administrativo'),
+    path('censo/', views.censo, name='censo')
 ]
 
 

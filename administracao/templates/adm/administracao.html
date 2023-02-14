@@ -25,18 +25,11 @@
 
                         <div class="row px-4 d-flex">
                           <div class="col painel">
-                            <a href=""><i class="fa-solid fa-file-lines me-3"></i>Visualizar entrevistas prévias</a>
+                            <a href="{% url 'listar_entrevistas' %}"><i class="fa-solid fa-file-lines me-3"></i>Visualizar entrevistas prévias</a>
                             <a href="{% url 'gerar_token' %}"><i class="fa-solid fa-ticket me-3"></i>Gerar cupons</a>                                                                          
-                              <a href=""><i class="fa-solid fa-user-graduate me-3"></i>Instrutores</a>          
+                              <a href="{% url 'censo' %}"><i class="fa-solid fa-chart-pie me-3"></i>Censo</a>          
                           </div>
                       </div>
-                      <div class="row px-4 d-flex">
-                        <div class="col painel">
-                            <a href=""><i class="fa-solid fa-users me-3"></i>Turmas</a> 
-                            <a href=""><i class="fa-solid fa-calendar me-3"></i>Eventos</a>                                                          
-                            <a href=""><i class="fa-solid fa-chalkboard me-3"></i>Palestras</a>                                                          
-
-                        </div>
                     </div>
                     </div>
                 </div>
