@@ -5,7 +5,7 @@ urlpatterns = [
 
     #errante
     path('animal/cadastrar-errante', views.cadastrar_errante, name='cadastrar_errante'),
-    # path listar errantes
+    path('animal/listar-errante', views.listar_errante, name='listar_errantes'),
 
     #tutor
     path('tutor/', views.listar_tutor, name='listar_tutor'),

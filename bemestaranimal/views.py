@@ -61,10 +61,15 @@ def cadastro_tutor(request):
     }
     return render(request, 'autenticacao/completar-cadastro.html', context)
 
-
-
 def index(request):
     return render(request, 'index.html')
+
+
+@login_required
+def area_tutor(request):
+    return render(request, 'tutor/area_tutor.html')
+
+
 
 @login_required
 def cadastrar_animal(request):
@@ -88,7 +93,6 @@ def cadastrar_animal(request):
             animal_form = Form_Animal(initial={'tutor':tutor})
             especie_form = Form_Especie()
 
-
     try:
         animais = Animal.objects.filter(tutor=tutor)
     except:
@@ -99,6 +103,23 @@ def cadastrar_animal(request):
         'animais':animais,
     }
     return render(request, 'tutor/animal_cadastro.html', context)
+
+@login_required
+def listar_animal(request):
+    pessoa = Pessoa.objects.get(user_id=request.user.id)
+    tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+    try:
+        animais = Animal.objects.filter(tutor=tutor)
+    except:
+        animais = []
+    if len(animais)==0:
+        messages.error(request, 'Você não há animais cadastrados ainda.')
+        return render(request, 'tutor/area_tutor.html')
+    context = {
+        'animais':animais
+    }
+    return render(request, 'tutor/animal_listar.html', context)
+
 
 @login_required
 def editar_animal(request, id):
@@ -154,7 +175,7 @@ def entrevistaAdocao(request, id):
         entrevistaPrevia_Form = Form_EntrevistaPrevia(request.POST)
         if entrevistaPrevia_Form.is_valid():
             entrevistaPrevia_Form.save()
-            messages.success(request, 'Uma orientação?')
+            messages.success(request, 'Uma orientação')
             return redirect('index')
     context = {
         'entrevistaPrevia_Form': entrevistaPrevia_Form,
@@ -163,7 +184,19 @@ def entrevistaAdocao(request, id):
     return render(request, 'catalogo/entrevista.html', context)
     
 
-
+@login_required
+def resgatar_cupom(request):
+    pessoa = Pessoa.objects.get(user_id=request.user.id)
+    tutor = Tutor.objects.get(pessoa_id=pessoa.id)
+    try:
+        cupom = TokenDesconto.objects.get(tutor=tutor)
+    except:
+        messages.error(request, 'Cupom não disponibilizado.')
+        return render(request, 'tutor/area_tutor.html')
+    context = {
+        'cupom':cupom
+    }
+    return render(request, 'resgatar-token.html')
 
 #quantidade de animais castrados e não castrados
 # vacinados (mas não pede essa informação no usuário, só na hora de cadastrar as informações extras)

@@ -1,0 +1,54 @@
+{% extends 'template.html' %}
+{% block title %}SSUBEA{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/administrativo.css">
+{% endblock %}
+{% load bootstrap5 %}
+{% block main %}
+<div class="row">
+    <div class="col d-flex pb-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">            
+                <div class="row">
+                    <div class="col text-dark px-4 pt-4">
+                        <h1 class="text-uppercase">
+                          Painel
+                        </h1>
+                        <div class="row px-4 pt-2 d-flex">
+                            <div class="col painel">
+                                <a href="{% url 'cadastrar_animal' %}"><i class="fa-solid fa-paw me-3"></i>Cadastrar animal</a>
+                                <a href="{% url 'listar_animal' %}"><i class="fa-solid fa-paw me-3"></i>Ver animais cadastrados</a>
+                                <a href="{% url 'cadastrar_errante' %}"><i class="fa-solid fa-ticket me-3"></i>Resgatar Cupom</a>                                                            
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endif %}
+<script>
+</script>
+{% endblock %}

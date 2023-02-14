@@ -31,13 +31,21 @@ def cadastrar_errante(request):
                 especie, verify = Especie.objects.get_or_create(nome_especie=v_especie.nome_especie)
                 errante.especie = especie
                 errante.save()
-
-                return redirect('index')
+                messages.success(request, 'Animal cadastrado com sucesso!')
+                return redirect('cadastrar_errante')
     context = {
         'errante_form': errante_form,
         'especie_form': especie_form
     }
     return render(request, 'errante/animal-errante-cadastro.html', context)
+
+@staff_member_required
+def listar_errante(request):
+    errantes = Errante.objects.all()
+    context = {
+        'errantes':errantes
+    }
+    return render(request, 'errante/animal_errante.html', context)
 
 @staff_member_required
 def listar_tutor(request):
@@ -126,10 +134,12 @@ def listar_entrevistas(request):
 @staff_member_required
 def questionario(request, id):
     entrevista = EntrevistaPrevia.objects.get(pk=id)
+    form_entrevista = Form_EntrevistaPrevia(instance=entrevista)
     context = {
-        'entrevista':entrevista
+        'entrevista':entrevista,
+        'form_entrevista':form_entrevista
     }
-    return render(request, 'questionario.html', context)
+    return render(request, 'adm/questionario.html', context)
 
 @staff_member_required
 def gerarToken(request):

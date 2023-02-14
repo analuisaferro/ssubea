@@ -3,16 +3,30 @@
 {% block css %}{% endblock %}
 {% block main %}
 {% load bootstrap5 %}
-<div class="row">
-    <div class="col">
-        <h2>Cadastrar animal errante</h2>
-        <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form errante_form %}
-        {% bootstrap_form especie_form %} 
-        <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
-        </form>
+<div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+    <div class="alert alert-success" role="alert">
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+    {% endif %}
+        <b>{{message}}</b>
+      </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <h2>Cadastrar animal errante</h2>
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form errante_form %}
+            {% bootstrap_form especie_form %} 
+            <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
+            </form>
+        </div>
     </div>
+</div>
 <script>
     const especie = document.getElementById('id_nome_especie');
     hide_parent(especie)
