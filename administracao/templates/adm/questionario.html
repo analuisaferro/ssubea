@@ -14,32 +14,28 @@
             <form method="POST">
             {% csrf_token %}
             {% bootstrap_form form_entrevista %}
-            <button type="submit" class="btn btn-primary w-100 mb-3" id="send">Cadastrar</button>
             </form>
          
         </div>
     </div>
     </div>
-    {% for message in messages %}
-    <div class="modal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>{{message}}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor%}
+
 <script>
+  toggleFormElements(true)
+  function toggleFormElements(bDisabled) { 
+    let inputs = document.getElementsByTagName("input"); 
+    for (var i = 0; i < inputs.length; i++) { 
+        inputs[i].disabled = bDisabled;
+    } 
+    let selects = document.getElementsByTagName("select");
+    for (var i = 0; i < selects.length; i++) {
+        selects[i].disabled = bDisabled;
+    }
+    let textareas = document.getElementsByTagName("textarea"); 
+    for (var i = 0; i < textareas.length; i++) { 
+        textareas[i].disabled = bDisabled;
+    }
+}
     function icpf(v){
         v=v.replace(/\D/g,"")                    //Remove tudo o que nao e digito
         v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto digitos

@@ -19,7 +19,7 @@
         <div class="c-text mx-2 d-flex flex-column py-1">
           <h5>{% if adocao.animal.nome %}{{adocao.animal.nome}}{% else %}{{adocao.raca}}{% endif %}</h5>
           <p class="card-text">{% if adocao.animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %},
-             {{adocao.animal.idade}} {% if adocao.animal.idade == 1 %}ano.{% else %}anos.{% endif %}
+             {{adocao.animal.idade}} {% if adocao.animal.idade == 1 %}ano{% else %}anos.{% endif %}
 
             </p>
             <a href="{% url 'entrevista_adocao' adocao.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>

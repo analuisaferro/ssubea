@@ -189,23 +189,26 @@ def censo(request):
     errantes = Errante.objects.all().count()
     adocao = Catalogo.objects.all().count()
     tutores = Tutor.objects.all().count()
-    animais = Animal.objects.all()
+    animal = Animal.objects.all()
+
+    #só de tutores
     castrados = [
         {'tipo': 'Castrados', 'quantidade': animais_tutor.filter(castrado=True).count()},
         {'tipo': 'Não castrados', 'quantidade': animais_tutor.filter(castrado=False).count()}
     ]
-    Animais = [
-        {'tipo':'Animais c/ tutor', 'quantidade':animais.exclude(tutor=None).count(), 'color':'red'},
-        {'tipo':'Animais p/ adoção', 'quantidade':animais.filter(tutor=None).count(), 'color':'blue'},
-        {'tipo':'Animais errantes', 'quantidade':errantes, 'color':'yellow'}
+    animais = [
+        {'tipo':'Animais c/ tutor', 'quantidade':animal.exclude(tutor=None).count(), 'color':'#d43f35'},
+        {'tipo':'Animais p/ adoção', 'quantidade':animal.filter(tutor=None).count(), 'color':'#4585F4'},
+        {'tipo':'Animais errantes', 'quantidade':errantes, 'color':'#099E57'}
 
 
-    ]
+    ] #vacinados precisa de cadastro de informação extra por parte da adm
     context = {
         'castrados':castrados,
         'errantes':errantes,
         'adocao':adocao,
         'tutores':tutores,
+        'animais':animais,
         'animais_tutor':animais_tutor.count()
     }
     return render(request, 'adm/censo.html', context)
