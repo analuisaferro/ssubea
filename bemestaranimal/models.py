@@ -125,7 +125,7 @@ class EntrevistaPrevia(models.Model):
     quest_quatro=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que filhotes exigem cuidados especiais, pois podem chorar, destruir objetos da casa e precisagem de um tempo de adaptação?')
     quest_cinco=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem condições de tratar o animal com ração de qualidade e água limpa diariamente?')
     quest_seis=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você compromete-se com os cuidados veterinários necessários, além da vacinação anual do animal?')
-    quest_sete=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que um animal vive cerca de 15 anos e que voc~e teá responsabilidade sobre sua vida durante todo esse tempo?')
+    quest_sete=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que um animal vive cerca de 15 anos e que você terá responsabilidade sobre sua vida durante todo esse tempo?')
     quest_oito=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem plena consciência de que precisará higienizar, diariamente, o espaço onde o animal viverá, estando sujeito ao contato com suas necessidades fisiológicas?')
     quest_nove=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, às vezes o animal poderá fazer suas necessidades em local indesejado?')
     quest_dez=models.BooleanField(choices=ESCOLHAS_CHOICES, default=False, verbose_name='Você tem consciência de que, como fiel depositário do animal, ele não pode ser doado, vendido ou abandonado sob NENHUMA hipótese?')

@@ -21,57 +21,28 @@
     </div>
   </div>
 </div>
+
 <div class="row">
-  <h2 class="ms-4 pt-5 pb-4">Cursos e Palestras</h2>
+  <h2 class="ms-4 pt-5 pb-4">Adote um animal!</h2>
 </div>
 
 <div class="row mx-auto px-5">
   <div class="d-flex justify-content-evenly">
-    <div class="item">
-      <div class="c-img">
-        <img src="{% static 'images/capacitanf.png' %}" class="img-fluid rounded-3">
-      </div>
-      <div class="c-text mx-2 d-flex flex-column py-1">
-        <h5>Curso do Rhafael</h5>
-        <p class="time ">09/01/2023</p>
-        <p>Curso de finanças pessoais lorem ipsum dolor...</p>
-        <button class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</button>
-      </div>
-    </div>
-    <div class="item">
-      <div class="c-img">
-        <img src="{% static 'images/capacitanf.png' %}" class="img-fluid rounded-3">
-      </div>
-      <div class="c-text mx-2 d-flex flex-column py-1">
-        <h5>Curso do Rhafael</h5>
-        <p class="time ">09/01/2023</p>
-        <p>Curso de finanças pessoais lorem ipsum dolor...</p>
-        <button class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</button>
-      </div>
-    </div>
-    <div class="item">
-      <div class="c-img">
-        <img src="{% static 'images/capacitanf.png' %}" class="img-fluid rounded-3">
-      </div>
-      <div class="c-text mx-2 d-flex flex-column py-1">
-        <h5>Curso do Rhafael</h5>
-        <p class="time ">09/01/2023</p>
-        <p>Curso de finanças pessoais lorem ipsum dolor...</p>
-        <button class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</button>
-      </div>
-    </div>
-    <div class="item">
-      <div class="c-img">
-        <img src="{% static 'images/capacitanf.png' %}" class="img-fluid rounded-3">
-      </div>
-      <div class="c-text mx-2 d-flex flex-column py-1">
-        <h5>Curso do Rhafael</h5>
-        <p class="time ">09/01/2023</p>
-        <p>Curso de finanças pessoais lorem ipsum dolor...</p>
-        <button class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</button>
-      </div>
-    </div>
+    {% for adocao in catalogo %}
+    <div class="item mx-2 mb-3">
+        <div class="d-img">
+          <img src="{{adocao.animal.animal_image.url}}" class="img-fluid rounded-3">
+        </div>
+        <div class="c-text mx-2 d-flex flex-column py-1">
+          <h5>{% if adocao.animal.nome %}{{adocao.animal.nome}}{% else %}{{adocao.raca}}{% endif %}</h5>
+          <p class="card-text">{% if adocao.animal.sexo == 'o' %}Macho{% else %}Fêmea{% endif %},
+             {{adocao.animal.idade}} {% if adocao.animal.idade == 1 %}ano.{% else %}anos.{% endif %}
 
+            </p>
+            <a href="{% url 'entrevista_adocao' adocao.id %}" class="btn btn-outline-primary rounded-1 btn-details py-1  my-3 mx-auto" id="esp-2">Ver detalhes</a>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>
 <div class="row mx-auto px-5">
